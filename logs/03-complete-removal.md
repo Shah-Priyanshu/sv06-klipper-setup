@@ -82,4 +82,67 @@ ls -la ~/klipper ~/moonraker ~/mainsail 2>/dev/null
 
 ## Output
 
-(Paste the output of the removal commands here)
+### Services Stopped and Disabled
+```
+sudo systemctl stop klipper moonraker
+sudo systemctl disable klipper moonraker
+Removed /etc/systemd/system/multi-user.target.wants/klipper.service.
+Removed /etc/systemd/system/multi-user.target.wants/moonraker.service.
+```
+
+### Main Directories Removed
+```
+✅ ~/klipper
+✅ ~/moonraker
+✅ ~/mainsail
+✅ ~/fluidd
+✅ ~/klipper_logs
+✅ ~/printer_data
+✅ ~/mainsail-config
+✅ ~/moonraker-timelapse
+✅ ~/octoeverywhere
+✅ ~/octoeverywhere-system
+✅ ~/kiauh
+✅ ~/klippy-env
+```
+
+### Remaining Files Found
+```
+drwxrwxr-x  4 user user     4096 Jun 15  2024 moonraker-env
+drwxrwxr-x  4 user user     4096 Jun 16  2024 octoeverywhere-env
+-rw-r--r--  1 user user    34374 Jun 16  2024 octoeverywhere-installer.log
+```
+
+### Services Check
+```
+✅ No klipper or moonraker services running
+```
+
+## Final Cleanup
+
+```bash
+rm -rf ~/moonraker-env
+rm -rf ~/octoeverywhere-env
+rm -f ~/octoeverywhere-installer.log
+```
+
+### Final Verification
+```
+=== Final check for Klipper-related files ===
+All clean!
+
+=== System ready for fresh installation ===
+Python 3.10.12
+git version 2.34.1
+```
+
+---
+
+## Status
+
+✅ **Complete removal successful!**
+✅ **System clean and ready for fresh installation**
+✅ **Python 3.10.12 available**
+✅ **Git 2.34.1 available**
+
+Ready to proceed with KIAUH installation.
