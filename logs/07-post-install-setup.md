@@ -90,15 +90,72 @@ sudo systemctl status ssh
 - IP Address: `10.0.0.139`
 - SSH Access: `ssh pri@10.0.0.139`
 
+### 4. Configure Passwordless Sudo
+
+**Purpose:** Allow sudo commands without password (required for automation)
+
+**Configuration:**
+```bash
+echo "pri ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/pri
+sudo chmod 440 /etc/sudoers.d/pri
+```
+
+**Verification:**
+```bash
+sudo whoami
+# Should return: root (without password prompt)
+```
+
+### 5. Setup SSH Key Authentication
+
+**Purpose:** Passwordless SSH from main Windows computer
+
+**On main computer (Windows PowerShell):**
+```powershell
+# Generate SSH key
+ssh-keygen -t ed25519 -C "pri@main-computer"
+
+# Copy public key to laptop
+type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh pri@10.0.0.139 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys"
+```
+
+**Verification:**
+```powershell
+ssh pri@10.0.0.139 "echo 'SSH key authentication working!'"
+```
+
+### 6. System Updates and Dependencies
+
+**Update system:**
+```bash
+sudo apt update
+sudo apt upgrade -y
+```
+
+**Install build tools and Klipper dependencies:**
+```bash
+sudo apt install -y git python3 python3-pip python3-venv build-essential libncurses-dev libffi-dev libssl-dev
+```
+
+**Packages installed:**
+- git (version control)
+- python3 + python3-dev (Python 3.13.5)
+- python3-pip (package manager)
+- python3-venv (virtual environments)
+- build-essential (gcc, g++, make)
+- libncurses-dev, libffi-dev, libssl-dev (development libraries)
+
 ## System Status
 
-- [x] Debian 12 installed successfully
-- [x] User has sudo access
+- [x] Debian 13 (Trixie) installed successfully
+- [x] User has sudo access (passwordless)
 - [x] Clamshell mode enabled (lid close ignored)
 - [x] SSH server running and accessible
+- [x] SSH key authentication configured
 - [x] Network connectivity confirmed
+- [x] System updated and dependencies installed
 - [ ] Desktop environment (pending - optional)
-- [ ] Klipper installation (pending)
+- [ ] Klipper installation (in progress)
 
 ## Next Steps
 
