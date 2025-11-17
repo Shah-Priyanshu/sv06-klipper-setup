@@ -1,7 +1,7 @@
 # Debian 12 Installation Plan for HP Pavilion 15-cc1xx
 
 **Date:** 2025-11-17  
-**Purpose:** Fresh Debian 12 install with EFI on HDD to work around HP Pavilion UEFI boot bug
+**Purpose:** Fresh Debian 12 install on HDD only (SSD removed)
 
 ## Hardware Configuration
 
@@ -10,25 +10,26 @@
 - **RAM:** 8GB
 - **Storage:**
   - **HDD (sda):** 232.9GB Seagate ST9250411AS
-  - **SSD (sdb):** 240GB ADATA SU650NS38
 
-## The Problem
+## Configuration Notes
 
-HP Pavilion 15-cc1xx series has a known UEFI firmware bug that prevents booting from EFI partitions located on SSDs. The workaround is to place the EFI boot partition on the HDD while keeping the OS on the faster SSD.
+- SSD removed to simplify installation
+- Single HDD configuration eliminates HP Pavilion EFI boot issues
+- 232GB is sufficient for Debian 12 + Klipper + future updates
 
 ## Partition Plan
 
-### HDD (sda) - Boot Only
+### HDD (sda) - All partitions
 - **sda1:** 512MB, FAT32, EFI System Partition (ESP)
   - Mount point: `/boot/efi`
   - Bootable flag: YES
   - This is where GRUB will be installed
 
-### SSD (sdb) - Main System
-- **sdb1:** 223GB, ext4, Root filesystem
+- **sda2:** 224GB, ext4, Root filesystem
   - Mount point: `/`
   - This is where the entire OS will live
-- **sdb2:** 8GB, swap
+
+- **sda3:** 8GB, swap
   - Swap space (equal to RAM)
 
 ## Installation Steps
@@ -56,27 +57,26 @@ HP Pavilion 15-cc1xx series has a known UEFI firmware bug that prevents booting 
    
    **For HDD (sda):**
    - Delete all existing partitions
-   - Create new partition:
+   
+   - Create partition 1 (EFI):
      - Size: 512MB
      - Type: EFI System Partition
      - Format: FAT32
      - Mount: `/boot/efi`
      - Bootable: YES
    
-   **For SSD (sdb):**
-   - Delete all existing partitions
-   - Create partition 1:
-     - Size: 223GB (or leave ~8GB for swap)
+   - Create partition 2 (Root):
+     - Size: 224GB (use remaining space minus 8GB)
      - Type: ext4
      - Mount: `/` (root)
-   - Create partition 2:
+   
+   - Create partition 3 (Swap):
      - Size: 8GB
      - Type: Linux swap
 
 6. **GRUB Installation**
    - When asked "Install GRUB bootloader", select YES
    - Choose `/dev/sda` (the HDD) as the target device
-   - This ensures GRUB goes to the HDD's EFI partition
 
 7. **Post-Install Verification**
    ```bash
@@ -92,9 +92,9 @@ HP Pavilion 15-cc1xx series has a known UEFI firmware bug that prevents booting 
 
 ## Notes
 
-- The system will boot from HDD EFI but run from SSD (fast performance)
-- Only the EFI partition (~512MB) needs to be read from HDD during boot
-- After boot, everything runs from the faster SSD
+- Simple single-drive configuration
+- HDD is sufficient for Klipper hosting (not IO-intensive)
+- 232GB provides plenty of space for OS, logs, and future expansion
 - Desktop environment can be added later if needed (Xfce recommended)
 
 ## Next Steps After Installation
