@@ -1,0 +1,125 @@
+# Post-Installation Setup - Debian 12
+
+**Date:** 2025-11-17  
+**Status:** Completed initial setup
+
+## Installation Summary
+
+- **OS:** Debian 12 (Bookworm)
+- **Hardware:** HP Pavilion 15-cc1xx, Intel i5-8250U, 8GB RAM, 232GB HDD
+- **User:** pri
+- **Installation:** Successful with HDD-only configuration
+
+## Partition Layout (Final)
+
+```
+sda1: 512MB   FAT32  /boot/efi (EFI System Partition)
+sda2: 224GB   ext4   / (root)
+sda3: 8GB     swap
+```
+
+## Post-Installation Steps Completed
+
+### 1. Add User to Sudoers
+
+**Issue:** User 'pri' was not in sudoers file
+
+**Solution:**
+- Rebooted into recovery mode
+- Selected "Advanced options for Debian" → "recovery mode" → "root"
+- Remounted filesystem: `mount -o remount,rw /`
+- Added user to sudo group: `usermod -aG sudo pri`
+- Rebooted
+
+**Verification:**
+```bash
+groups
+# Output should include 'sudo'
+
+sudo whoami
+# Should return: root
+```
+
+### 2. Enable Clamshell Mode
+
+**Purpose:** Allow laptop to run with lid closed (headless operation)
+
+**Configuration:**
+```bash
+sudo nano /etc/systemd/logind.conf
+```
+
+**Changes made:**
+```
+HandleLidSwitch=ignore
+HandleLidSwitchExternalPower=ignore
+HandleLidSwitchDocked=ignore
+```
+
+**Apply changes:**
+```bash
+sudo systemctl restart systemd-logind
+```
+
+**Verification:**
+```bash
+grep HandleLid /etc/systemd/logind.conf
+```
+
+### 3. Install and Configure SSH
+
+**Installation:**
+```bash
+sudo apt update
+sudo apt install -y openssh-server
+```
+
+**Enable and start SSH:**
+```bash
+sudo systemctl enable ssh
+sudo systemctl start ssh
+```
+
+**Verification:**
+```bash
+sudo systemctl status ssh
+# Should show: active (running)
+```
+
+**Network Configuration:**
+- IP Address: `10.0.0.139`
+- SSH Access: `ssh pri@10.0.0.139`
+
+## System Status
+
+- [x] Debian 12 installed successfully
+- [x] User has sudo access
+- [x] Clamshell mode enabled (lid close ignored)
+- [x] SSH server running and accessible
+- [x] Network connectivity confirmed
+- [ ] Desktop environment (pending - optional)
+- [ ] Klipper installation (pending)
+
+## Next Steps
+
+1. **Optional:** Install Xfce desktop environment
+   ```bash
+   sudo apt install xfce4 xfce4-goodies
+   ```
+
+2. **Install Klipper dependencies**
+   - Git
+   - Python 3
+   - Build tools
+   - Klipper itself
+
+3. **Restore Klipper configuration** from this repository
+
+4. **Connect printer** and test configuration
+
+## Notes
+
+- System is now accessible via SSH for all future configuration
+- Can operate headless with lid closed
+- HDD-only configuration eliminates HP Pavilion EFI boot issues
+- Ready for Klipper installation
