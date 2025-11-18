@@ -145,6 +145,33 @@ sudo apt install -y git python3 python3-pip python3-venv build-essential libncur
 - build-essential (gcc, g++, make)
 - libncurses-dev, libffi-dev, libssl-dev (development libraries)
 
+### 7. Disable Sleep and Suspend (24/7 Operation)
+
+**Purpose:** Keep system running 24/7 for printer server
+
+**Mask sleep targets:**
+```bash
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+```
+
+**Configure sleep.conf:**
+```bash
+sudo mkdir -p /etc/systemd/sleep.conf.d
+sudo tee /etc/systemd/sleep.conf.d/nosleep.conf > /dev/null << 'EOF'
+[Sleep]
+AllowSuspend=no
+AllowHibernation=no
+AllowSuspendThenHibernate=no
+AllowHybridSleep=no
+EOF
+```
+
+**Verification:**
+```bash
+systemctl status sleep.target suspend.target
+# Should show: masked and inactive
+```
+
 ## System Status
 
 - [x] Debian 13 (Trixie) installed successfully
@@ -154,6 +181,7 @@ sudo apt install -y git python3 python3-pip python3-venv build-essential libncur
 - [x] SSH key authentication configured
 - [x] Network connectivity confirmed
 - [x] System updated and dependencies installed
+- [x] Sleep/suspend disabled for 24/7 operation
 - [ ] Desktop environment (pending - optional)
 - [ ] Klipper installation (in progress)
 
