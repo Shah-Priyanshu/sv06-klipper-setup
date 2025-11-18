@@ -108,13 +108,25 @@ Choose either:
 ## Current Progress
 
 - [x] Prerequisites installed
-- [ ] Firmware configured and built
+- [x] Firmware configured and built
 - [ ] Firmware flashed to printer
 - [ ] Serial port identified
 - [ ] printer.cfg created
 - [ ] Klipper service configured
 - [ ] Moonraker installed
 - [ ] Web interface installed
+
+## Firmware Configuration Details
+
+**MCU Settings Used:**
+- Architecture: STMicroelectronics STM32
+- Processor: STM32F103
+- Bootloader offset: 28KiB
+- Clock: 8 MHz crystal
+- Communication: Serial (USART1 PA10/PA9)
+
+**Build command:** `make`
+**Output file:** `~/klipper/out/klipper.bin`
 
 ## Next Steps
 
