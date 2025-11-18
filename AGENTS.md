@@ -46,6 +46,7 @@ This ensures you have full context about:
 - **Follow Conventions:** Always follow the established file naming and formatting conventions in this repository
 - **Update Logs:** Update log files after completing significant steps, commit immediately
 - **Document Everything:** Keep detailed records of all configuration changes, commands run, and decisions made
+- **Run Verification Commands:** When guiding the user through a process, run verification commands via SSH automatically to check results. Do not ask the user to run simple checks - be proactive and verify things yourself. Only ask the user to perform actions that require physical interaction (like inserting SD cards, pressing buttons, etc.) or viewing output directly on their terminal.
 
 ## Key Information
 
