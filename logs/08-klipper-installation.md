@@ -238,3 +238,32 @@ After successful flash:
 - Will build printer.cfg step-by-step for better understanding
 - SV06 uses CH340 USB-to-serial chip (driver usually included in Linux)
 - Static IP ensures consistent SSH access at 10.0.0.139
+
+### Firmware Flash Success (via USB Serial Connection)
+
+After multiple SD card attempts, we discovered that:
+- The printer WAS able to communicate via USB serial (`ttyUSB0`)
+- Klipper firmware was functional (either from old installation or one of our flash attempts)
+- The key was to continue with configuration despite SD card not renaming to `.CUR`
+
+**MCU Connection Verified:**
+```
+serial: /dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
+```
+
+**Klipper Stats Output:**
+```
+mcu: freq=72005048 
+heater_bed: temp=23.8
+extruder: temp=24.9
+```
+
+✅ **Klipper firmware is running and communicating with MCU!**
+
+### Next Steps
+
+1. Install Moonraker (API server)
+2. Install Mainsail or Fluidd (web interface)
+3. Configure printer settings
+4. Calibrate printer
+
