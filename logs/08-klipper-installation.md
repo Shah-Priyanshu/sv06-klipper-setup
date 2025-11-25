@@ -109,6 +109,8 @@ Choose either:
 
 - [x] Prerequisites installed
 - [x] Firmware configured and built
+- [x] Static IP configured (10.0.0.139)
+- [x] SD card prepared with firmware.bin
 - [ ] Firmware flashed to printer
 - [ ] Serial port identified
 - [ ] printer.cfg created
@@ -136,8 +138,103 @@ Choose either:
 4. Test Klipper connection
 5. Install Moonraker and web interface
 
+## Session: 2025-11-25 - Network Configuration and Firmware Preparation
+
+### Issue: Dynamic IP Changed
+**Problem:** Laptop IP changed from 10.0.0.139 to 10.0.0.143, breaking SSH access.
+
+**Root cause:** NetworkManager was configured for DHCP, causing IP to change on each connection.
+
+**Solution: Configure Static IP**
+
+1. **Identify network connection:**
+   ```bash
+   nmcli connection show
+   # Connection: "86 Roomies" (WiFi)
+   # Interface: wlo1
+   # Gateway: 10.0.0.1
+   ```
+
+2. **Configure static IP:**
+   ```bash
+   sudo nmcli connection modify '86 Roomies' \
+     ipv4.addresses 10.0.0.139/24 \
+     ipv4.gateway 10.0.0.1 \
+     ipv4.dns '64.71.255.204,64.71.255.198' \
+     ipv4.method manual
+   ```
+
+3. **Apply changes:**
+   ```bash
+   sudo nmcli connection down '86 Roomies'
+   sudo nmcli connection up '86 Roomies'
+   ```
+
+4. **Verification:**
+   ```bash
+   ip addr show wlo1 | grep 'inet 10'
+   # Output: inet 10.0.0.139/24 brd 10.0.0.255 scope global noprefixroute wlo1
+   ```
+
+**Result:** ✅ Static IP 10.0.0.139 configured successfully. IP will no longer change.
+
+### SD Card Firmware Preparation
+
+**SD card detected:**
+- Device: `/dev/sdb1` (7.5GB FAT32)
+- Mount: `/media/pri/12AE-E2DE`
+
+**Firmware preparation steps:**
+
+1. **Backup old firmware:**
+   ```bash
+   mv /media/pri/12AE-E2DE/klipper.bin /media/pri/12AE-E2DE/klipper-old-backup.bin
+   ```
+   - Old firmware: 31KB (from June 2024)
+
+2. **Copy new firmware:**
+   ```bash
+   cp ~/klipper/out/klipper.bin /media/pri/12AE-E2DE/firmware.bin
+   ```
+   - New firmware: 36KB (built Nov 17, 2025)
+   - MD5: `0d71c31abc45eb6156ae406d2b4793f8`
+
+3. **Verify integrity:**
+   ```bash
+   md5sum ~/klipper/out/klipper.bin /media/pri/12AE-E2DE/firmware.bin
+   # Both files match: 0d71c31abc45eb6156ae406d2b4793f8
+   ```
+
+4. **Safely unmount:**
+   ```bash
+   sync
+   sudo umount /media/pri/12AE-E2DE
+   ```
+
+**Status:** ✅ SD card ready with fresh Klipper firmware (firmware.bin)
+
+### Next Steps
+
+**Ready to flash firmware to SV06:**
+
+1. Remove SD card from laptop
+2. Power OFF printer
+3. Insert SD card into printer
+4. Power ON printer (wait 10-20 seconds for automatic flash)
+5. Power OFF printer
+6. Remove SD card and verify `firmware.bin` renamed to `firmware.CUR`
+7. Power ON printer with new firmware
+
+After successful flash:
+- Connect printer via USB to laptop
+- Identify serial port (`ls /dev/serial/by-id/`)
+- Configure Klipper systemd service
+- Create printer.cfg
+- Install Moonraker and Mainsail
+
 ## Notes
 
 - Starting fresh without using backup config
 - Will build printer.cfg step-by-step for better understanding
 - SV06 uses CH340 USB-to-serial chip (driver usually included in Linux)
+- Static IP ensures consistent SSH access at 10.0.0.139
