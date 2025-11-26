@@ -17,7 +17,7 @@
 [DONE] **Camera Detected:**
 - **Model:** Sunplus SPCA2281 Web Camera (USB)
 - **Device:** `/dev/video0` (XWF-1080P)
-- **Resolution:** 640x480 @ 15fps
+- **Resolution:** 640x480 @ 25fps
 - **Stream Port:** 8080
 
 [DONE] **Services Status:**
@@ -258,10 +258,12 @@ mode: ustreamer
 port: 8080
 device: /dev/video0
 resolution: 640x480
-max_fps: 15
+max_fps: 25
 ```
 
 **Backup Created:** `crowsnest.conf.2025-11-25-2019`
+
+**Update (2025-11-26):** Increased `max_fps` from 15 to 25 to improve stream smoothness. Camera supports up to 30 FPS with MJPG format.
 
 ### Moonraker Configuration
 
@@ -286,7 +288,7 @@ install_script: tools/pkglist.sh
 - Stream URL: `/webcam/?action=stream`
 - Snapshot URL: `/webcam/?action=snapshot`
 - Service: ustreamer
-- Target FPS: 15
+- Target FPS: 25
 - Flip settings: As needed per user preference
 
 **Configuration stored in:** `~/printer_data/config/.mainsail.json` (managed by Mainsail)
