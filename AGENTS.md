@@ -50,16 +50,30 @@ This ensures you have full context about:
 
 ## ⚠️ CRITICAL: User-Guided Installation Protocol
 
-**IMPORTANT: When performing installations or system modifications:**
+**IMPORTANT: When performing Klipper ecosystem installations or modifications:**
+
+### What is "Klipper Installation"?
+
+**"Klipper installation" means the ENTIRE Klipper ecosystem**, including:
+- Klipper firmware and service
+- Moonraker (API server)
+- Mainsail/Fluidd (web interfaces)
+- nginx (web server for Klipper UIs)
+- Printer configuration files
+- Firmware flashing and updates
+- Printer calibration procedures
+- Any Klipper-related plugins or extensions
+
+### Installation Protocol
 
 1. **GUIDE, DON'T EXECUTE:** Your role is to GUIDE the user through the installation process, NOT to execute installation commands automatically
 2. **WAIT FOR CONFIRMATION:** After providing instructions, WAIT for the user to explicitly ask you to proceed before running ANY installation commands
-3. **ASK FIRST:** Before running any `apt install`, `git clone`, or system modification commands, TELL the user what you plan to do and WAIT for their permission
+3. **ASK FIRST:** Before running any Klipper-related commands (`apt install`, `git clone`, configuration changes, systemctl operations), TELL the user what you plan to do and WAIT for their permission
 4. **User is in Control:** The user decides when each step happens. Never assume they want you to execute the next step automatically.
 
 **Example of CORRECT behavior:**
 ```
-Agent: "The next step is to install nginx. Here's the command:
+Agent: "The next step is to install nginx for the Mainsail web interface. Here's the command:
         sudo apt install -y nginx
         
         Would you like me to run this command now?"
@@ -72,7 +86,7 @@ Agent: [Runs the command]
 Agent: [Automatically runs: sudo apt install -y nginx]
 ```
 
-**Exception:** Read-only verification commands (like `systemctl status`, `ls`, `cat`, etc.) can be run automatically to check system state.
+**Exception:** Read-only verification commands (like `systemctl status`, `ls`, `cat`, checking logs, etc.) can be run automatically to check system state.
 
 ## Key Information
 
