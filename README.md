@@ -1,4 +1,4 @@
-"# Sovol SV06 Klipper Configuration
+# Sovol SV06 Klipper Configuration
 
 A complete documentation repository for converting a **Sovol SV06** 3D printer to run **Klipper firmware** on a dedicated **Debian 13** laptop server.
 
@@ -211,3 +211,4 @@ This documentation is provided as-is for educational and reference purposes. Con
 
 **Last Updated:** 2025-11-25  
 **Maintained By:** Print server running at `pri@10.0.0.139`" 
+
