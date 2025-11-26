@@ -132,6 +132,51 @@ The bottom face clearly shows the nozzle was not primed when printing began. The
 
 ---
 
+### Set 4: Screw Thread Test
+
+#### Screw Head (screw_bottom.jpg)
+
+**Observed Issues:**
+- **Plier marks/damage** - Visible compression marks across the screw head from forcing the fit with pliers
+- **Stringing across slot** - Filament strands bridging the screwdriver slot opening, making it unusable
+- **Rough surface texture** - Inconsistent layer lines on top of screw head
+- **Scalloped outer perimeter** - Rough circular edge around the head
+
+**Tolerance Issue:**
+The screw required pliers to insert into the cube's threaded hole. This indicates the thread tolerance is too tight - a common issue where holes/threads print smaller than designed due to:
+- Material shrinkage during cooling
+- First layer squish reducing hole diameter
+- Slight over-extrusion on inner perimeters
+
+#### Assembled View (cube_plus_screw.jpg)
+
+**Observed Issues:**
+- **Screw seats flush** - Once forced in, the screw head sits level with the cube bottom
+- **First layer roughness** - Blobby/rough outer perimeter on cube bottom (consistent with earlier analysis)
+- **Stringing visible** - Same stringing pattern on screw head slot
+- **Corner imperfections** - Rough material at cube corners
+
+**Positive Signs:**
+- Thread geometry was accurate enough to fully engage
+- Screw threaded all the way in and sits flush
+- Mechanical connection achieved - parts are functional
+
+#### Set 4 Summary
+
+| Issue | Severity | Likely Cause |
+|-------|----------|--------------|
+| Thread tolerance too tight | Medium | Hole shrinkage, over-extrusion on inner perimeters |
+| Stringing in screw slot | Medium | Retraction settings, no purge line |
+| Required pliers to assemble | Medium | Tolerance/shrinkage compensation needed |
+| Flush fit achieved | Good | Thread geometry is accurate |
+
+**Tolerance Fix Options:**
+1. **Horizontal Expansion** - Add -0.1 to -0.2mm in slicer to compensate for shrinkage
+2. **XY Hole Compensation** - Enable in OrcaSlicer (typically 0.1-0.2mm)
+3. **Reduce flow rate** slightly for inner perimeters (98-99%)
+
+---
+
 ## Identified Problems
 
 ### 1. No Purge Line
@@ -229,6 +274,7 @@ Add after heating commands, before print starts.
 - [DONE] Bottom face analyzed
 - [DONE] Orca logo face analyzed
 - [DONE] OrcaSlicer text face analyzed
+- [DONE] Screw thread test analyzed
 - [PENDING] Implement purge line fix
 - [PENDING] Adjust first layer settings
 - [PENDING] Re-print calibration cube
@@ -245,6 +291,8 @@ Add after heating commands, before print starts.
 | cube_bottom.jpg | Bottom of calibration cube | Analyzed |
 | cube_orca_logo.jpg | Orca logo face | Analyzed |
 | cube_orcaslicer_text.jpg | OrcaSlicer text face | Analyzed |
+| screw_bottom.jpg | Screw head showing plier marks | Analyzed |
+| cube_plus_screw.jpg | Cube with screw inserted (flush fit) | Analyzed |
 
 ---
 
@@ -268,6 +316,7 @@ Add after heating commands, before print starts.
 | **HIGH** | Required 50% speed reduction | First layer too fast | Reduce first layer speed to 20-25mm/s |
 | **MEDIUM** | Diagonal banding/rippling on walls | Speed/ringing | Tune Pressure Advance, check belts |
 | **MEDIUM** | Corner blobs/over-extrusion | Direction changes | Pressure Advance tuning |
+| **MEDIUM** | Thread tolerance too tight | Hole shrinkage | Enable XY Hole Compensation (0.1-0.2mm) |
 | **LOW** | Minor stringing at bottom | Retraction at start | Purge line will help |
 
 ### Conclusion
@@ -277,12 +326,14 @@ The print demonstrates that the printer hardware is functioning correctly - the 
 1. **Missing purge line** caused 80% of the visible defects (rough bottom, corner issues, first layer problems)
 2. **Speed settings** need adjustment for first layer
 3. **Pressure Advance** would improve wall quality but is optional tuning
+4. **Thread tolerance** is slightly tight - XY Hole Compensation can fix this for functional prints
 
 **Recommended next steps:**
 1. Add purge line to PRINT_START macro or OrcaSlicer start G-code
 2. Reduce first layer speed to 20-25mm/s in OrcaSlicer
-3. Re-print calibration cube to verify improvements
-4. (Optional) Tune Pressure Advance for better wall quality
+3. Enable XY Hole Compensation (0.1-0.2mm) for better thread/hole tolerances
+4. Re-print calibration cube to verify improvements
+5. (Optional) Tune Pressure Advance for better wall quality
 
 ---
 
