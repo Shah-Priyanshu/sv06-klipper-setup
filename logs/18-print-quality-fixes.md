@@ -95,7 +95,7 @@ gcode:
 
 **How It Works:**
 1. `PRINT_START` calls `_FIRST_LAYER_SETTINGS` → limits speed to 25mm/s, accel to 1000mm/s²
-2. OrcaSlicer sends `SET_PRINT_STATS_INFO CURRENT_LAYER=2` when layer 2 starts
+2. OrcaSlicer sends `SET_PRINT_STATS_INFO CURRENT_LAYER=2` when layer 2 starts (requires Layer change G-code setup)
 3. Our intercepted macro detects layer 2 and calls `_NORMAL_SETTINGS` → restores 200mm/s, 3000mm/s²
 4. `PRINT_END` also calls `_NORMAL_SETTINGS` as a safety cleanup
 
@@ -115,13 +115,46 @@ gcode:
 
 ---
 
-## Optional OrcaSlicer Settings (User Action)
+## Required OrcaSlicer Settings (User Action)
 
-These settings are now **optional** since firmware handles speed limiting. However, they can still improve print quality:
+**Profile:** SV06 0.4 nozzle
 
-### 3. First Layer Line Width [OPTIONAL]
+### 3. Layer Change G-code [REQUIRED]
 
-**Location:** OrcaSlicer > Quality > Line Width
+**This is required for the automatic speed restoration to work!**
+
+**Location:** OrcaSlicer > Printer Settings > Machine G-code > Layer change G-code
+
+**Add this code:**
+```gcode
+SET_PRINT_STATS_INFO CURRENT_LAYER={layer_num+1}
+```
+
+**Why:** OrcaSlicer does not send layer change info to Klipper by default. This G-code tells Klipper which layer is being printed, allowing our `SET_PRINT_STATS_INFO` interceptor to restore normal speeds after layer 1.
+
+**Note:** `{layer_num+1}` is used because OrcaSlicer's `layer_num` is 0-indexed (first layer = 0), but Klipper expects 1-indexed layers.
+
+---
+
+### 4. XY Hole Compensation [RECOMMENDED]
+
+**Issue:** Threaded screw required pliers to insert into cube - tolerance too tight due to hole shrinkage.
+
+**Location:** OrcaSlicer > Process Settings > Quality (search "hole compensation")
+
+| Setting | Current | Recommended |
+|---------|---------|-------------|
+| XY hole compensation | 0 mm | **0.15 mm** |
+
+**Why:** Holes print smaller than designed due to material shrinkage. This cannot be fixed in firmware - it must be set in the slicer.
+
+---
+
+## Optional OrcaSlicer Settings
+
+### 5. First Layer Line Width [OPTIONAL]
+
+**Location:** OrcaSlicer > Process Settings > Quality > Line Width
 
 | Setting | Current | Recommended |
 |---------|---------|-------------|
@@ -131,17 +164,15 @@ These settings are now **optional** since firmware handles speed limiting. Howev
 
 ---
 
-### 4. XY Hole Compensation [RECOMMENDED]
+## OrcaSlicer Setup Summary
 
-**Issue:** Threaded screw required pliers to insert into cube - tolerance too tight due to hole shrinkage.
+For profile **"SV06 0.4 nozzle"**:
 
-**Location:** OrcaSlicer > Quality > Precision (or search "hole compensation")
-
-| Setting | Current | Recommended |
-|---------|---------|-------------|
-| XY hole compensation | 0 mm | **0.1-0.2 mm** |
-
-**Why:** Holes print smaller than designed due to material shrinkage. This cannot be fixed in firmware.
+| Setting | Location | Value |
+|---------|----------|-------|
+| Layer change G-code | Printer Settings > Machine G-code | `SET_PRINT_STATS_INFO CURRENT_LAYER={layer_num+1}` |
+| XY hole compensation | Process Settings > Quality | `0.15 mm` |
+| First layer line width | Process Settings > Quality | `120%` (optional) |
 
 ---
 
@@ -202,7 +233,9 @@ After implementing all fixes:
 | `~/printer_data/config/cfgs/misc-macros.cfg` | Added _FIRST_LAYER_SETTINGS macro | [DONE] |
 | `~/printer_data/config/cfgs/misc-macros.cfg` | Added _NORMAL_SETTINGS macro | [DONE] |
 | `~/printer_data/config/cfgs/misc-macros.cfg` | Added SET_PRINT_STATS_INFO interceptor | [DONE] |
-| OrcaSlicer printer profile | XY hole compensation 0.1-0.2mm | [OPTIONAL] User action |
+| OrcaSlicer "SV06 0.4 nozzle" | Layer change G-code | [REQUIRED] User action |
+| OrcaSlicer "SV06 0.4 nozzle" | XY hole compensation 0.15mm | [REQUIRED] User action |
+| OrcaSlicer "SV06 0.4 nozzle" | First layer line width 120% | [OPTIONAL] User action |
 
 ---
 
@@ -210,11 +243,12 @@ After implementing all fixes:
 
 - [DONE] Purge line added to PRINT_START macro
 - [DONE] First layer speed limiting (firmware-enforced)
-- [DONE] Automatic speed restoration after layer 1
+- [DONE] Automatic speed restoration macro ready
 - [DONE] Klipper restarted and verified
-- [OPTIONAL] OrcaSlicer XY hole compensation (for thread tolerance)
+- [PENDING] OrcaSlicer: Add layer change G-code (required for speed restore)
+- [PENDING] OrcaSlicer: Set XY hole compensation to 0.15mm
 - [PENDING] Verification print
 
 ---
 
-**Next Action:** Re-print calibration cube to verify improvements. Optionally set XY hole compensation in OrcaSlicer for better thread fit.
+**Next Action:** Update OrcaSlicer profile "SV06 0.4 nozzle" with layer change G-code and XY hole compensation, then re-print calibration cube.
