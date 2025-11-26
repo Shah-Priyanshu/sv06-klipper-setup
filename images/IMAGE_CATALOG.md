@@ -11,6 +11,8 @@ This document catalogs all screenshots and images in the printer configuration r
 | `start_end_gcode.png` | 2025-11-26 | 15-gcode-path-fix.md | PRINT_START macro parameters | [DONE] RESOLVED |
 | `slicer_test_print.png` | 2025-11-26 | 16-orcaslicer-bed-size-fix.md | Bed size mismatch | [DONE] RESOLVED |
 | `printer_gcode_viewer_tracking.png` | 2025-11-26 | 16-orcaslicer-bed-size-fix.md | Bed size mismatch | [DONE] RESOLVED |
+| `screw_top.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Calibration cube screw analysis | [DONE] REFERENCE |
+| `screw_side.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Calibration cube screw analysis | [DONE] REFERENCE |
 
 ---
 
@@ -149,6 +151,86 @@ Same as `slicer_test_print.png` - bed size mismatch:
 
 ---
 
+### 4. screw_top.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - calibration cube screw test piece  
+**Related Log:** [17-first-test-print-analysis.md](../logs/17-first-test-print-analysis.md)
+
+**Description:**
+Top-down photograph of the screw test piece from the OrcaSlicer calibration cube, showing the screw head surface quality.
+
+**What It Shows:**
+- Flat top surface of screw head with visible layer lines
+- Circular perimeter of screw head
+- Minor stringing trailing off the left side
+- Overall surface quality assessment
+
+**Problem Context:**
+Part of the first test print analysis to evaluate print quality and identify calibration issues.
+
+**Analysis Results:**
+- **Surface quality:** Good - flat and level with consistent layer lines
+- **Circular geometry:** Maintained with slight roughness on perimeter
+- **Stringing:** Minor, related to lack of purge line at print start
+- **No major defects** on top surface
+
+**Status:** [DONE] REFERENCE - Print quality documentation
+
+**Technical Details:**
+- **Issue Type:** Print quality analysis
+- **Category:** Calibration/test print
+- **Print Settings:** OrcaSlicer defaults, 50% speed factor applied mid-print
+
+---
+
+### 5. screw_side.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - calibration cube screw test piece  
+**Related Log:** [17-first-test-print-analysis.md](../logs/17-first-test-print-analysis.md)
+
+**Description:**
+Side profile photograph of the screw test piece showing thread geometry and layer quality.
+
+**What It Shows:**
+- Thread profile with multiple turns visible
+- Thread grooves and peaks
+- Base/flange area with first layer quality
+- Stringing at bottom of screw
+- Overall structural integrity
+
+**Problem Context:**
+Part of the first test print analysis to evaluate thread printing capability and identify tolerance issues.
+
+**Analysis Results:**
+- **Thread geometry:** Functional but not sharp - peaks are rounded
+- **Stringing at base:** Significant, caused by no purge line at print start
+- **First layer flange:** Rough and ragged edges
+- **Thread depth:** Slightly shallow, contributes to tight tolerance
+- **Layer adhesion:** Good throughout threaded section
+- **Structural integrity:** Solid, screw is functional
+
+**Root Cause:**
+1. No purge line - caused stringing and rough first layer
+2. Over-extrusion or insufficient cooling - caused rounded thread peaks
+3. Material shrinkage - contributes to tight thread tolerance
+
+**Recommended Fixes:**
+1. Add purge line to start G-code
+2. Increase part cooling for sharper details
+3. Enable XY Hole Compensation (0.1-0.2mm)
+
+**Status:** [DONE] REFERENCE - Print quality documentation
+
+**Technical Details:**
+- **Issue Type:** Print quality analysis
+- **Category:** Calibration/test print (thread tolerance test)
+- **Print Settings:** OrcaSlicer defaults, 50% speed factor applied mid-print
+- **Thread tolerance:** Too tight, required pliers to insert into cube
+
+---
+
 ## Image Usage Guidelines
 
 ### Referencing Images in Logs
@@ -205,10 +287,13 @@ printer-config/
 │   ├── IMAGE_CATALOG.md (this file)
 │   ├── start_end_gcode.png
 │   ├── slicer_test_print.png
-│   └── printer_gcode_viewer_tracking.png
+│   ├── printer_gcode_viewer_tracking.png
+│   ├── screw_top.jpg
+│   └── screw_side.jpg
 ├── logs/
 │   ├── 15-gcode-path-fix.md
-│   └── 16-orcaslicer-bed-size-fix.md
+│   ├── 16-orcaslicer-bed-size-fix.md
+│   └── 17-first-test-print-analysis.md
 └── configs/
 ```
 
@@ -222,6 +307,10 @@ Images are categorized by:
 **Problem Diagnosis:**
 - `slicer_test_print.png` - Shows expected positioning
 - `printer_gcode_viewer_tracking.png` - Shows actual positioning discrepancy
+
+**Print Quality Analysis:**
+- `screw_top.jpg` - Screw head top surface quality
+- `screw_side.jpg` - Thread geometry and layer quality
 
 **Future Categories:**
 - Calibration results (bed mesh visualizations, etc.)
@@ -261,6 +350,7 @@ All images currently in PNG format for:
 
 - [Log 15: G-Code Upload Fix](../logs/15-gcode-path-fix.md) - PRINT_START macro configuration
 - [Log 16: Bed Size Fix](../logs/16-orcaslicer-bed-size-fix.md) - OrcaSlicer bed dimension correction
+- [Log 17: First Test Print Analysis](../logs/17-first-test-print-analysis.md) - Calibration cube quality analysis
 - [Log 13: OrcaSlicer Setup](../logs/13-orcaslicer-setup.md) - Initial OrcaSlicer configuration
 
 ---
@@ -273,10 +363,12 @@ All images currently in PNG format for:
 - Cataloged 3 images related to OrcaSlicer configuration issues
 - Documented bed size fix (250mm → 220mm)
 - Documented PRINT_START macro parameter fix
+- Added screw_top.jpg and screw_side.jpg from calibration cube analysis
+- Added "Print Quality Analysis" category
 
 ---
 
 **Last Updated:** 2025-11-26  
-**Total Images:** 3  
-**Issues Documented:** 2  
-**All Issues Status:** [DONE] RESOLVED
+**Total Images:** 5  
+**Issues Documented:** 3  
+**All Issues Status:** [DONE] RESOLVED/REFERENCE
