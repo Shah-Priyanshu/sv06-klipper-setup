@@ -11,8 +11,16 @@ This document catalogs all screenshots and images in the printer configuration r
 | `start_end_gcode.png` | 2025-11-26 | 15-gcode-path-fix.md | PRINT_START macro parameters | [DONE] RESOLVED |
 | `slicer_test_print.png` | 2025-11-26 | 16-orcaslicer-bed-size-fix.md | Bed size mismatch | [DONE] RESOLVED |
 | `printer_gcode_viewer_tracking.png` | 2025-11-26 | 16-orcaslicer-bed-size-fix.md | Bed size mismatch | [DONE] RESOLVED |
-| `screw_top.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Calibration cube screw analysis | [DONE] REFERENCE |
-| `screw_side.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Calibration cube screw analysis | [DONE] REFERENCE |
+| `cube_x.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | X face quality analysis | [DONE] REFERENCE |
+| `cube_y.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Y face quality analysis | [DONE] REFERENCE |
+| `cube_z.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Z face (top) quality analysis | [DONE] REFERENCE |
+| `cube_bottom.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Bottom face / first layer analysis | [DONE] REFERENCE |
+| `cube_orca_logo.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Orca logo detail analysis | [DONE] REFERENCE |
+| `cube_orcaslicer_text.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Text detail analysis | [DONE] REFERENCE |
+| `cube_plus_screw.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Assembled cube + screw | [DONE] REFERENCE |
+| `screw_bottom.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Screw head (plier damage) | [DONE] REFERENCE |
+| `screw_top.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Screw head top surface | [DONE] REFERENCE |
+| `screw_side.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Screw thread profile | [DONE] REFERENCE |
 
 ---
 
@@ -151,7 +159,222 @@ Same as `slicer_test_print.png` - bed size mismatch:
 
 ---
 
-### 4. screw_top.jpg
+### 4. cube_x.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - OrcaSlicer calibration cube  
+**Related Log:** [17-first-test-print-analysis.md](../logs/17-first-test-print-analysis.md)
+
+**Description:**
+Photograph of the X-marked face of the calibration cube showing wall quality and surface finish.
+
+**What It Shows:**
+- Embossed "X" letter on cube face
+- Layer lines and surface texture
+- Corner quality at edges
+- Wall consistency
+
+**Analysis Results:**
+- **Significant layer inconsistency** - visible waviness/rippling, especially on right side of X
+- **Diagonal banding pattern** - suggests mechanical issues or extrusion inconsistency
+- **Corner damage** - bottom-left and top-left corners show poor adhesion/lifting
+- **Surface texture varies** - some areas smoother than others
+
+**Status:** [DONE] REFERENCE - Print quality documentation
+
+---
+
+### 5. cube_y.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - OrcaSlicer calibration cube  
+**Related Log:** [17-first-test-print-analysis.md](../logs/17-first-test-print-analysis.md)
+
+**Description:**
+Photograph of the Y-marked face of the calibration cube showing wall quality and surface finish.
+
+**What It Shows:**
+- Embossed "Y" letter on cube face
+- Layer lines and surface texture
+- Corner quality at edges
+- Wall consistency
+
+**Analysis Results:**
+- **Similar diagonal banding/rippling** - consistent with X face, suggesting systemic issue
+- **Better overall appearance** than X face but still has visible layer lines
+- **Top surface** looks relatively clean
+- **Bottom corner damage** - first layer adhesion problems
+- **Slight bulging** on lower right area
+
+**Status:** [DONE] REFERENCE - Print quality documentation
+
+---
+
+### 6. cube_z.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - OrcaSlicer calibration cube  
+**Related Log:** [17-first-test-print-analysis.md](../logs/17-first-test-print-analysis.md)
+
+**Description:**
+Photograph of the top surface (Z face) of the calibration cube showing top layer quality.
+
+**What It Shows:**
+- Embossed "Z" letter on top surface
+- Diagonal infill pattern
+- Top solid layer quality
+- Edge/perimeter finish
+
+**Analysis Results:**
+- **Top surface quality is good** - diagonal infill pattern is visible and consistent
+- **Z embossed letter clearly defined** - good detail resolution, sharp edges
+- **Minor edge imperfections** - slight roughness on outer perimeter
+- **Best face of the cube** - indicates good layer stacking and Z-axis consistency
+
+**Status:** [DONE] REFERENCE - Print quality documentation
+
+---
+
+### 7. cube_bottom.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - OrcaSlicer calibration cube  
+**Related Log:** [17-first-test-print-analysis.md](../logs/17-first-test-print-analysis.md)
+
+**Description:**
+Photograph of the bottom surface of the calibration cube showing first layer quality.
+
+**What It Shows:**
+- First layer surface finish
+- Center hole for screw thread
+- Outer perimeter quality
+- Corner buildup/blobs
+
+**Analysis Results:**
+- **Severe first layer problems** - confirms issues from missing purge line
+- **Outer perimeter rough and scalloped** - wavy, inconsistent edges all around
+- **Stringing in center hole** - multiple filament strands crossing circular opening
+- **Poor first layer adhesion** - visible gaps and uneven extrusion lines
+- **Corner blobs/buildup** - excess material at all four corners
+
+**Root Cause:**
+Nozzle was not primed when printing began - first perimeter has inconsistent extrusion.
+
+**Status:** [DONE] REFERENCE - Print quality documentation
+
+---
+
+### 8. cube_orca_logo.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - OrcaSlicer calibration cube  
+**Related Log:** [17-first-test-print-analysis.md](../logs/17-first-test-print-analysis.md)
+
+**Description:**
+Photograph of the Orca logo face of the calibration cube showing embossed detail quality.
+
+**What It Shows:**
+- Orca/whale logo with diagonal line
+- Embossed detail depth and clarity
+- Surface quality around logo
+- Bottom edge condition
+
+**Analysis Results:**
+- **Logo clearly recognizable** - orca shape well-defined and identifiable
+- **Good embossed detail** - logo edges are crisp with proper depth
+- **Surface quality decent** - relatively smooth with consistent layer lines
+- **Bottom edge damage** - rough/torn material from first layer problems
+- **Minor stringing at bottom** - small wisps of filament at base
+
+**Status:** [DONE] REFERENCE - Print quality documentation
+
+---
+
+### 9. cube_orcaslicer_text.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - OrcaSlicer calibration cube  
+**Related Log:** [17-first-test-print-analysis.md](../logs/17-first-test-print-analysis.md)
+
+**Description:**
+Photograph of the OrcaSlicer text face of the calibration cube showing fine text detail.
+
+**What It Shows:**
+- "Orca Slicer" embossed text
+- Decorative wave design below text
+- Fine detail resolution
+- Layer banding on edges
+
+**Analysis Results:**
+- **Text fully readable** - "Orca Slicer" text is clear and legible
+- **Good letter definition** - all characters crisp with clean edges
+- **Wave design printed well** - decorative waves are smooth and continuous
+- **Right edge has visible layer banding** - consistent with rippling on X/Y faces
+- **Bottom edge problems** - rough, uneven material accumulation
+- **Excellent fine detail resolution** - small text features reproduced accurately
+
+**Status:** [DONE] REFERENCE - Print quality documentation
+
+---
+
+### 10. cube_plus_screw.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - OrcaSlicer calibration cube  
+**Related Log:** [17-first-test-print-analysis.md](../logs/17-first-test-print-analysis.md)
+
+**Description:**
+Photograph of the assembled calibration cube with screw inserted, showing thread engagement.
+
+**What It Shows:**
+- Screw fully inserted into cube's threaded hole
+- Flush fit of screw head with cube bottom
+- First layer quality of cube bottom
+- Overall assembly result
+
+**Analysis Results:**
+- **Screw seats flush** - screw head sits level with cube bottom
+- **First layer roughness** - blobby/rough outer perimeter on cube bottom
+- **Stringing visible** - same stringing pattern on screw head slot
+- **Corner imperfections** - rough material at cube corners
+- **Thread geometry accurate** - parts are functional despite tight tolerance
+
+**Status:** [DONE] REFERENCE - Print quality documentation
+
+---
+
+### 11. screw_bottom.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - OrcaSlicer calibration cube screw  
+**Related Log:** [17-first-test-print-analysis.md](../logs/17-first-test-print-analysis.md)
+
+**Description:**
+Photograph of the screw head showing damage from forcing fit with pliers.
+
+**What It Shows:**
+- Screw head top surface
+- Screwdriver slot
+- Compression marks from pliers
+- Surface texture quality
+
+**Analysis Results:**
+- **Plier marks/damage** - visible compression marks from forcing the fit
+- **Stringing across slot** - filament strands bridging screwdriver slot opening
+- **Rough surface texture** - inconsistent layer lines on top of screw head
+- **Scalloped outer perimeter** - rough circular edge around head
+
+**Tolerance Issue:**
+Screw required pliers to insert - thread tolerance too tight due to:
+- Material shrinkage during cooling
+- First layer squish reducing hole diameter
+- Slight over-extrusion on inner perimeters
+
+**Status:** [DONE] REFERENCE - Print quality documentation
+
+---
+
+### 12. screw_top.jpg
 
 **Date Taken:** 2025-11-26  
 **Source:** Physical photograph - calibration cube screw test piece  
@@ -184,7 +407,7 @@ Part of the first test print analysis to evaluate print quality and identify cal
 
 ---
 
-### 5. screw_side.jpg
+### 13. screw_side.jpg
 
 **Date Taken:** 2025-11-26  
 **Source:** Physical photograph - calibration cube screw test piece  
@@ -288,6 +511,14 @@ printer-config/
 │   ├── start_end_gcode.png
 │   ├── slicer_test_print.png
 │   ├── printer_gcode_viewer_tracking.png
+│   ├── cube_x.jpg
+│   ├── cube_y.jpg
+│   ├── cube_z.jpg
+│   ├── cube_bottom.jpg
+│   ├── cube_orca_logo.jpg
+│   ├── cube_orcaslicer_text.jpg
+│   ├── cube_plus_screw.jpg
+│   ├── screw_bottom.jpg
 │   ├── screw_top.jpg
 │   └── screw_side.jpg
 ├── logs/
@@ -308,9 +539,19 @@ Images are categorized by:
 - `slicer_test_print.png` - Shows expected positioning
 - `printer_gcode_viewer_tracking.png` - Shows actual positioning discrepancy
 
-**Print Quality Analysis:**
-- `screw_top.jpg` - Screw head top surface quality
-- `screw_side.jpg` - Thread geometry and layer quality
+**Print Quality Analysis - Calibration Cube Faces:**
+- `cube_x.jpg` - X face wall quality
+- `cube_y.jpg` - Y face wall quality
+- `cube_z.jpg` - Z face (top surface) quality
+- `cube_bottom.jpg` - First layer quality
+- `cube_orca_logo.jpg` - Embossed logo detail
+- `cube_orcaslicer_text.jpg` - Fine text detail
+
+**Print Quality Analysis - Screw Thread Test:**
+- `cube_plus_screw.jpg` - Assembled cube with screw
+- `screw_bottom.jpg` - Screw head (plier damage visible)
+- `screw_top.jpg` - Screw head top surface
+- `screw_side.jpg` - Thread geometry profile
 
 **Future Categories:**
 - Calibration results (bed mesh visualizations, etc.)
@@ -365,10 +606,11 @@ All images currently in PNG format for:
 - Documented PRINT_START macro parameter fix
 - Added screw_top.jpg and screw_side.jpg from calibration cube analysis
 - Added "Print Quality Analysis" category
+- Added all calibration cube images (cube_x, cube_y, cube_z, cube_bottom, cube_orca_logo, cube_orcaslicer_text, cube_plus_screw, screw_bottom)
 
 ---
 
 **Last Updated:** 2025-11-26  
-**Total Images:** 5  
+**Total Images:** 13  
 **Issues Documented:** 3  
 **All Issues Status:** [DONE] RESOLVED/REFERENCE
