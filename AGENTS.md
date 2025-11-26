@@ -35,8 +35,106 @@ This ensures you have full context about:
 - **Configuration Files:** Use `.cfg` extension for Klipper configs (e.g., `printer.cfg`, `macros.cfg`)
 - **Documentation:** Use Markdown (`.md`) for logs, guides, and notes
 - **Log Files:** Use numbered prefix convention: `00-`, `01-`, `02-`, etc. (e.g., `05-initial-setup.md`, `06-debian12-install-plan.md`)
+- **Images/Screenshots:** Store in `images/` directory with descriptive filenames
 - **Formatting:** Use 4 spaces for indentation in config files
 - **Comments:** In `.cfg` files, use `#` for comments. Be descriptive about why settings were chosen.
+
+## Image Management
+
+### Image Storage and Organization
+
+All screenshots and images must be stored in the `images/` directory and cataloged in `images/IMAGE_CATALOG.md`.
+
+### Adding New Images
+
+When adding a new screenshot or image:
+
+1. **Use descriptive filenames:**
+   - Pattern: `source_description_context.png`
+   - Good: `mainsail_bed_mesh_visualization.png`
+   - Bad: `screenshot1.png`, `IMG_20250126.png`
+
+2. **Save to images directory:**
+   ```bash
+   # Move image to correct location
+   mv screenshot.png images/descriptive_name.png
+   ```
+
+3. **Update IMAGE_CATALOG.md:**
+   - Add entry to the Image Index table
+   - Create detailed section with:
+     - Date taken
+     - Source (application/interface)
+     - Related log file(s)
+     - Description of what image shows
+     - Problem context (if applicable)
+     - Root cause (if applicable)
+     - Resolution/fix applied (if applicable)
+     - Current status ([DONE] RESOLVED, [PENDING], [REFERENCE])
+
+4. **Reference in documentation:**
+   ```markdown
+   ![Description](../images/filename.png)
+   ```
+
+5. **Commit with descriptive message:**
+   ```bash
+   git add images/new_image.png images/IMAGE_CATALOG.md
+   git commit -m "Add screenshot showing [specific issue/feature]"
+   ```
+
+### Image Naming Conventions
+
+**Format:** `source_description_context.png`
+
+**Examples:**
+- `orcaslicer_start_gcode_configuration.png`
+- `mainsail_gcode_preview_centering_issue.png`
+- `klipper_console_mcu_connection_error.png`
+- `moonraker_api_warning_path_mismatch.png`
+
+### Image Catalog Template
+
+When adding to `images/IMAGE_CATALOG.md`, use this template:
+
+```markdown
+### N. filename.png
+
+**Date Taken:** YYYY-MM-DD  
+**Source:** Application/Interface name  
+**Related Log:** [log-file.md](../logs/log-file.md)
+
+**Description:**
+Brief description of what the image shows.
+
+**What It Shows:**
+- Bullet points of specific elements visible
+- Key information displayed
+- Notable features or settings
+
+**Problem Context:** (if applicable)
+Description of the problem this image helped diagnose or document.
+
+**Root Cause:** (if applicable)
+Technical explanation of what caused the issue.
+
+**Resolution:** (if applicable)
+How the problem was fixed.
+
+**Status:** [DONE] RESOLVED / [PENDING] / [REFERENCE]
+
+**Technical Details:**
+- Issue Type: Configuration/Hardware/Software
+- Fix Type: Description of fix
+- Files Modified: List of changed files
+```
+
+### Image Quality Guidelines
+
+- **Format:** PNG for screenshots (lossless)
+- **Resolution:** Keep readable text (minimum 1280x720)
+- **File Size:** Keep under 5MB per image
+- **Content:** Crop to relevant area, remove sensitive information
 
 ## Agent Behavior
 
