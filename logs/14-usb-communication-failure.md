@@ -423,3 +423,107 @@ ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1a86", ATTR{idProduct}=="7523"
 ---
 
 **Status:** ✅ RESOLVED - System stable, preventive measures implemented
+
+---
+
+## Post-Resolution: Second Failure and Root Cause Discovery
+
+**2025-11-25 22:30** - Second communication failure occurred  
+**2025-11-25 22:35** - User observation: Camera previously had device ID instability on same USB port  
+**2025-11-25 22:40** - **ROOT CAUSE IDENTIFIED: Faulty USB Port 2 on laptop**
+
+### Diagnostic Evidence
+
+**USB Topology Before Fix (Port 2 - FAULTY):**
+```
+Port 002: Dev 006, CH340 Printer ← UNSTABLE PORT
+Port 001: Dev 002, XWF-1080P Camera
+Port 003: Dev 004, Built-in HP camera
+```
+
+**User's Key Observation:**
+> "In my earlier setup I have the camera connected in that port [Port 2] and the Device id kept on changing from video0 to video2 often."
+
+This was the critical clue! Device ID instability indicates:
+- Physical port damage or wear
+- Bad solder joints on port connector
+- Faulty USB controller/hub for that specific port
+
+### Solution Implemented
+
+**USB Port Reconfiguration:**
+```
+Port 001: Dev 051, CH340 Printer ← MOVED HERE (GOOD PORT)
+Port 004: Dev 052, USB-C Hub → XWF-1080P Camera ← MOVED TO HUB
+Port 003: Dev 004, Built-in HP camera (unchanged)
+```
+
+**User Action:**
+1. Unplugged printer from Port 2 (faulty)
+2. Moved printer to Port 1 (the port that previously worked fine for camera)
+3. Moved camera to USB-C hub (isolates camera from printer's USB bus)
+
+### Testing Results After Port Change
+
+**Test 1: Single G28 Homing**
+- ✅ Result: SUCCESS
+- `bytes_retransmit=0` (perfect communication)
+- No disconnection errors
+
+**Test 2: Stress Test - 5 Consecutive G28 Cycles**
+- ✅ Result: ALL SUCCESSFUL
+- `bytes_retransmit=0` throughout entire test
+- `send_seq=3474`, `receive_seq=3474` (perfect packet sync)
+- `print_time` advanced from 90.269 to 110.046 (all homing completed)
+- Printer state: "ready" (operational)
+
+**Comparison:**
+
+| Metric | Port 2 (Faulty) | Port 1 (Good) |
+|--------|----------------|---------------|
+| Disconnects | Multiple | 0 |
+| bytes_retransmit | 2345+ | 0 |
+| I/O Errors | Yes | No |
+| Stability | Failed within minutes | Stable for extended testing |
+| Device Binding | Lost after disconnect | Maintained |
+
+### Final Root Cause Analysis
+
+**Hardware Issue: Faulty USB Port 2**
+
+**Evidence Chain:**
+1. Camera previously experienced device ID instability on Port 2
+2. Printer experienced multiple disconnects on Port 2
+3. After moving printer to Port 1: ZERO issues
+4. USB autosuspend was already disabled (not the cause)
+5. CH340 driver working correctly (proved by Port 1 stability)
+
+**Conclusion:**
+- ❌ **NOT** a CH340 chip problem
+- ❌ **NOT** an electrical noise problem
+- ❌ **NOT** a USB power management problem
+- ✅ **YES** - Hardware failure in laptop's USB Port 2
+
+**Probable Cause:**
+- Worn/damaged USB port connector
+- Bad solder joint on motherboard
+- Intermittent connection due to physical defect
+- Common issue in aging laptops (HP Pavilion 15-cc1xx is older model)
+
+### Permanent Fix Status
+
+**Hardware Configuration:**
+- ✅ Printer on Port 1 (stable, verified)
+- ✅ Camera on USB-C Hub (isolated, stable)
+- ✅ USB autosuspend disabled (preventive measure)
+- ✅ Tested with 5+ homing cycles (no failures)
+
+**Recommendations:**
+- ⚠️ **Avoid using USB Port 2** for any critical devices
+- ✅ Continue using Port 1 for printer (proven stable)
+- ✅ Consider marking Port 2 with tape/label ("DO NOT USE - FAULTY")
+- 📝 If Port 1 eventually fails, consider external USB hub or new host machine
+
+---
+
+**Final Status:** ✅ FULLY RESOLVED - Hardware issue identified and mitigated by port reassignment
