@@ -48,6 +48,32 @@ This ensures you have full context about:
 - **Document Everything:** Keep detailed records of all configuration changes, commands run, and decisions made
 - **Run Verification Commands:** When guiding the user through a process, run verification commands via SSH automatically to check results. Do not ask the user to run simple checks - be proactive and verify things yourself. Only ask the user to perform actions that require physical interaction (like inserting SD cards, pressing buttons, etc.) or viewing output directly on their terminal.
 
+## ⚠️ CRITICAL: User-Guided Installation Protocol
+
+**IMPORTANT: When performing installations or system modifications:**
+
+1. **GUIDE, DON'T EXECUTE:** Your role is to GUIDE the user through the installation process, NOT to execute installation commands automatically
+2. **WAIT FOR CONFIRMATION:** After providing instructions, WAIT for the user to explicitly ask you to proceed before running ANY installation commands
+3. **ASK FIRST:** Before running any `apt install`, `git clone`, or system modification commands, TELL the user what you plan to do and WAIT for their permission
+4. **User is in Control:** The user decides when each step happens. Never assume they want you to execute the next step automatically.
+
+**Example of CORRECT behavior:**
+```
+Agent: "The next step is to install nginx. Here's the command:
+        sudo apt install -y nginx
+        
+        Would you like me to run this command now?"
+User: "yes"
+Agent: [Runs the command]
+```
+
+**Example of INCORRECT behavior:**
+```
+Agent: [Automatically runs: sudo apt install -y nginx]
+```
+
+**Exception:** Read-only verification commands (like `systemctl status`, `ls`, `cat`, etc.) can be run automatically to check system state.
+
 ## Key Information
 
 - **Printer Model:** Sovol SV06
