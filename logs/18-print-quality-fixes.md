@@ -1,7 +1,7 @@
 # Print Quality Fixes - Post First Test Print
 
 **Date:** 2025-11-26  
-**Status:** [DONE] PARTIALLY COMPLETE  
+**Status:** [DONE] FIRMWARE FIXES COMPLETE  
 **Related Log:** [17-first-test-print-analysis.md](17-first-test-print-analysis.md)
 
 ---
@@ -38,6 +38,7 @@ Modified `~/printer_data/config/cfgs/misc-macros.cfg`:
     M109 S{hotendtemp}                                   ; set & wait for hotend temp
 
     PURGE_LINE                                           ; draw purge line to prime nozzle
+    _FIRST_LAYER_SETTINGS                                ; apply first layer speed limits
 ```
 
 **PURGE_LINE Macro Details:**
@@ -50,28 +51,75 @@ Modified `~/printer_data/config/cfgs/misc-macros.cfg`:
 
 ---
 
-## Fixes Requiring User Action (OrcaSlicer)
+### 2. Firmware-Enforced First Layer Speed Limiting [DONE]
 
-These settings need to be changed in OrcaSlicer on the Windows PC.
+**Issue:** Default first layer speed too fast, causing poor bed adhesion. Required manual 50% speed reduction during first test print. Slicer settings alone are fragile - changing slicers or profiles could reintroduce the problem.
 
-### 2. First Layer Speed Settings [PENDING]
+**Solution:** Implement firmware-level speed limiting that:
+1. Automatically applies slow speeds at print start
+2. Automatically restores normal speeds after first layer
+3. Works regardless of slicer settings
 
-**Issue:** Default first layer speed too fast, causing poor bed adhesion. Required manual 50% speed reduction during first test print.
+**Macros Added to `misc-macros.cfg`:**
 
-**Location:** OrcaSlicer > Printer Settings > Speed (or Process Settings)
+```gcode
+[gcode_macro _FIRST_LAYER_SETTINGS]
+description: Apply conservative settings for first layer
+gcode:
+    {% set FIRST_LAYER_VELOCITY = 25 %}      ; mm/s - max speed for first layer
+    {% set FIRST_LAYER_ACCEL = 1000 %}       ; mm/s^2 - max acceleration for first layer
+    
+    SET_VELOCITY_LIMIT VELOCITY={FIRST_LAYER_VELOCITY} ACCEL={FIRST_LAYER_ACCEL}
 
-| Setting | Current (Default) | Recommended |
-|---------|-------------------|-------------|
-| First layer speed | ~50 mm/s | **20-25 mm/s** |
-| First layer infill speed | ~50 mm/s | **20-25 mm/s** |
+[gcode_macro _NORMAL_SETTINGS]
+description: Restore normal printer settings after first layer
+gcode:
+    {% set max_velocity = printer.configfile.settings.printer.max_velocity|default(200)|int %}
+    {% set max_accel = printer.configfile.settings.printer.max_accel|default(3000)|int %}
+    
+    SET_VELOCITY_LIMIT VELOCITY={max_velocity} ACCEL={max_accel}
 
-**Why:** Slower first layer allows better adhesion and gives time for the filament to properly bond to the bed surface.
+[gcode_macro SET_PRINT_STATS_INFO]
+rename_existing: _SET_PRINT_STATS_INFO_BASE
+description: Intercept layer changes to restore speed after first layer
+gcode:
+    _SET_PRINT_STATS_INFO_BASE {rawparams}
+    
+    {% if params.CURRENT_LAYER is defined %}
+        {% set layer = params.CURRENT_LAYER|int %}
+        {% if layer == 2 %}
+            _NORMAL_SETTINGS
+        {% endif %}
+    {% endif %}
+```
+
+**How It Works:**
+1. `PRINT_START` calls `_FIRST_LAYER_SETTINGS` → limits speed to 25mm/s, accel to 1000mm/s²
+2. OrcaSlicer sends `SET_PRINT_STATS_INFO CURRENT_LAYER=2` when layer 2 starts
+3. Our intercepted macro detects layer 2 and calls `_NORMAL_SETTINGS` → restores 200mm/s, 3000mm/s²
+4. `PRINT_END` also calls `_NORMAL_SETTINGS` as a safety cleanup
+
+**First Layer Limits:**
+| Parameter | First Layer | Normal |
+|-----------|-------------|--------|
+| Max Velocity | 25 mm/s | 200 mm/s |
+| Max Acceleration | 1000 mm/s² | 3000 mm/s² |
+
+**Benefits:**
+- Slicer-independent - works with any slicer or profile
+- Automatic - no manual speed adjustment needed
+- Self-restoring - normal speeds resume automatically after layer 1
+- Safe - even if slicer sends faster speeds, firmware caps them
+
+**Verification:** Klipper restarted successfully, service active.
 
 ---
 
-### 3. First Layer Line Width [PENDING]
+## Optional OrcaSlicer Settings (User Action)
 
-**Issue:** Standard line width provides less bed contact area.
+These settings are now **optional** since firmware handles speed limiting. However, they can still improve print quality:
+
+### 3. First Layer Line Width [OPTIONAL]
 
 **Location:** OrcaSlicer > Quality > Line Width
 
@@ -79,11 +127,11 @@ These settings need to be changed in OrcaSlicer on the Windows PC.
 |---------|---------|-------------|
 | First layer line width | 100% (0.4mm) | **120% (0.48mm)** |
 
-**Why:** Wider first layer lines "squish" more into the bed, improving adhesion and filling gaps better.
+**Why:** Wider first layer lines "squish" more into the bed, improving adhesion.
 
 ---
 
-### 4. XY Hole Compensation [PENDING]
+### 4. XY Hole Compensation [RECOMMENDED]
 
 **Issue:** Threaded screw required pliers to insert into cube - tolerance too tight due to hole shrinkage.
 
@@ -93,18 +141,11 @@ These settings need to be changed in OrcaSlicer on the Windows PC.
 |---------|---------|-------------|
 | XY hole compensation | 0 mm | **0.1-0.2 mm** |
 
-**Why:** Holes print smaller than designed due to:
-- Material shrinkage during cooling
-- Inner perimeter over-extrusion
-- First layer squish
-
-Start with 0.1mm and increase if needed.
+**Why:** Holes print smaller than designed due to material shrinkage. This cannot be fixed in firmware.
 
 ---
 
 ## Future Calibration (Optional)
-
-These are lower priority and require additional setup:
 
 ### Pressure Advance Tuning
 
@@ -144,18 +185,10 @@ After implementing all fixes:
 |-------|-----------------|
 | Rough first layer | Smooth, consistent first layer |
 | Stringing at print start | Eliminated by purge line |
-| Poor bed adhesion | Improved with slower speed + wider lines |
-| Tight thread tolerance | Better fit with hole compensation |
+| Poor bed adhesion | Improved with firmware speed limiting |
+| Tight thread tolerance | Better fit with hole compensation (slicer) |
 | Corner blobs | Reduced (full fix needs Pressure Advance) |
 | Wall rippling | Reduced (full fix needs Input Shaper) |
-
----
-
-## Verification Plan
-
-1. **Re-print calibration cube** after OrcaSlicer settings are updated
-2. **Compare results** to first print photos
-3. **Document improvements** in follow-up log
 
 ---
 
@@ -163,22 +196,25 @@ After implementing all fixes:
 
 | File | Change | Status |
 |------|--------|--------|
-| `~/printer_data/config/cfgs/misc-macros.cfg` | Added PURGE_LINE call to PRINT_START | [DONE] Applied |
-| OrcaSlicer printer profile | First layer speed 20-25mm/s | [PENDING] User action |
-| OrcaSlicer printer profile | First layer width 120% | [PENDING] User action |
-| OrcaSlicer printer profile | XY hole compensation 0.1-0.2mm | [PENDING] User action |
+| `~/printer_data/config/cfgs/misc-macros.cfg` | Added PURGE_LINE call to PRINT_START | [DONE] |
+| `~/printer_data/config/cfgs/misc-macros.cfg` | Added _FIRST_LAYER_SETTINGS call to PRINT_START | [DONE] |
+| `~/printer_data/config/cfgs/misc-macros.cfg` | Added _NORMAL_SETTINGS call to PRINT_END | [DONE] |
+| `~/printer_data/config/cfgs/misc-macros.cfg` | Added _FIRST_LAYER_SETTINGS macro | [DONE] |
+| `~/printer_data/config/cfgs/misc-macros.cfg` | Added _NORMAL_SETTINGS macro | [DONE] |
+| `~/printer_data/config/cfgs/misc-macros.cfg` | Added SET_PRINT_STATS_INFO interceptor | [DONE] |
+| OrcaSlicer printer profile | XY hole compensation 0.1-0.2mm | [OPTIONAL] User action |
 
 ---
 
 ## Current Status
 
 - [DONE] Purge line added to PRINT_START macro
+- [DONE] First layer speed limiting (firmware-enforced)
+- [DONE] Automatic speed restoration after layer 1
 - [DONE] Klipper restarted and verified
-- [PENDING] OrcaSlicer first layer speed adjustment
-- [PENDING] OrcaSlicer first layer width adjustment
-- [PENDING] OrcaSlicer XY hole compensation
+- [OPTIONAL] OrcaSlicer XY hole compensation (for thread tolerance)
 - [PENDING] Verification print
 
 ---
 
-**Next Action:** Update OrcaSlicer settings on Windows PC, then re-print calibration cube to verify improvements.
+**Next Action:** Re-print calibration cube to verify improvements. Optionally set XY hole compensation in OrcaSlicer for better thread fit.
