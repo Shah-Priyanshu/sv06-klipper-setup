@@ -99,11 +99,52 @@ Agent: [Automatically runs: sudo apt install -y nginx]
 
 ## Current Status
 
-As of last update:
-- Debian 13 installed with HDD-only configuration (no EFI boot issues)
-- Clamshell mode enabled (headless operation)
-- SSH configured with key authentication
-- System updated and build dependencies installed
-- Klipper Python virtual environment created at `~/klippy-env`
-- Klipper repository cloned to `~/klipper`
-- Next: Complete Klipper service setup, install Moonraker and web interface
+**Last Updated:** 2025-11-25
+
+### Completed:
+- ✅ Debian 13 installed with HDD-only configuration (no EFI boot issues)
+- ✅ Clamshell mode enabled (headless operation)
+- ✅ SSH configured with key authentication (passwordless)
+- ✅ System updated and build dependencies installed
+- ✅ Static IP configured: 10.0.0.139
+- ✅ Klipper installed and running
+  - Python environment: `~/klippy-env`
+  - Repository: `~/klipper`
+  - Service: Active, connected to MCU
+  - MCU: STM32F103 @ 72MHz via CH340 USB
+  - Serial: `/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0`
+- ✅ Klipper firmware flashed (or working with existing firmware)
+- ✅ Moonraker v0.9.3-128-g960e933 installed via KIAUH
+  - Repository: `~/moonraker`
+  - Python environment: `~/moonraker-env`
+  - Service: Active, connected to Klipper
+  - Port: 7125
+- ✅ Mainsail web interface installed via KIAUH
+  - Location: `~/mainsail`
+  - Access: http://10.0.0.139
+  - Status: Fully functional
+- ✅ Mainsail-Config installed
+  - Location: `~/mainsail-config`
+  - Config: `~/printer_data/config/mainsail.cfg` (symlink)
+- ✅ nginx web server installed and configured
+  - Serving Mainsail on port 80
+  - Proxying Moonraker API
+- ✅ Configuration issues fixed
+  - Fixed `/home/pi/` to `/home/pri/` paths in configs
+  - Moonraker socket path corrected
+  - Virtual SD card path corrected
+- ✅ Printer controls verified (homing successful)
+
+### Configuration Files:
+- **Main Config:** `~/printer_data/config/printer.cfg` (bassamanator SV06 config)
+- **Moonraker:** `~/printer_data/config/moonraker.conf`
+- **Mainsail:** `~/printer_data/config/mainsail.cfg` (symlink)
+- **Additional:** `~/printer_data/config/cfgs/` (modular configs)
+
+### Next Phase:
+- ⏳ **Printer Calibration**
+  - PID tuning (bed and hotend)
+  - Bed mesh calibration
+  - Z-offset calibration
+  - Input shaper (requires accelerometer)
+  - Pressure advance tuning
