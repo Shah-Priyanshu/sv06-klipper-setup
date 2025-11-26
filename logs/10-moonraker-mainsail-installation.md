@@ -1,26 +1,26 @@
 # Moonraker and Mainsail Installation
 
 **Date:** 2025-11-25  
-**Status:** ✅ COMPLETED  
-**Prerequisites:** ✅ Klipper firmware verified and communicating  
+**Status:** [DONE] COMPLETED  
+**Prerequisites:** [DONE] Klipper firmware verified and communicating  
 **Installation Method:** KIAUH (Klipper Installation And Update Helper)
 
 ---
 
 ## Installation Summary
 
-✅ **Successfully Installed:**
+[DONE] **Successfully Installed:**
 - **Moonraker v0.9.3-128-g960e933** - API server for Klipper
 - **Mainsail** - Web interface (latest stable)
 - **Mainsail-Config** - Recommended macros and configuration
 - **nginx** - Web server serving Mainsail on port 80
 
-✅ **All Services Running:**
+[DONE] **All Services Running:**
 - Klipper: Active, connected to MCU
 - Moonraker: Active, connected to Klipper
 - nginx: Active, serving web interface
 
-✅ **Web Interface Accessible:**
+[DONE] **Web Interface Accessible:**
 - URL: http://10.0.0.139
 - Status: Fully functional
 - Printer controls verified (homing successful)
@@ -29,7 +29,7 @@
 
 ## Current Status
 
-✅ **Completed:**
+[DONE] **Completed:**
 - Debian 13 system installed and configured
 - Static IP configured: 10.0.0.139
 - Klipper firmware functional and communicating with MCU
@@ -42,7 +42,7 @@
 - **Configuration path issues fixed**
 - **Web interface verified working**
 
-⏳ **Next Steps:**
+[PENDING] **Next Steps:**
 - Initial printer calibration (PID tuning, bed mesh, etc.)
 
 ---
@@ -158,14 +158,14 @@ All services should show "active (running)" in green.
 ## Installation Process (Actual Steps Performed)
 
 ### Step 1: Verify KIAUH Status
-✅ Confirmed KIAUH installed at `~/kiauh`
+[DONE] Confirmed KIAUH installed at `~/kiauh`
 
 ### Step 2: Remove Old Moonraker Installation
-✅ Used KIAUH Remove menu to clean up incomplete Moonraker installation
+[DONE] Used KIAUH Remove menu to clean up incomplete Moonraker installation
 - Removed service, repository, Python environment, and policykit rules
 
 ### Step 3: Install Moonraker via KIAUH
-✅ KIAUH Menu: `1) [Install]` → `2) [Moonraker]`
+[DONE] KIAUH Menu: `1) [Install]` → `2) [Moonraker]`
 - Created example moonraker.conf: Yes
 - Cloned from: https://github.com/Arksine/moonraker
 - Created Python virtual environment at `~/moonraker-env`
@@ -175,7 +175,7 @@ All services should show "active (running)" in green.
 - **Result:** Moonraker v0.9.3-128-g960e933 installed successfully
 
 ### Step 4: Install Mainsail via KIAUH
-✅ KIAUH Menu: `1) [Install]` → `3) [Mainsail]` → `1) Reinstall Mainsail`
+[DONE] KIAUH Menu: `1) [Install]` → `3) [Mainsail]` → `1) Reinstall Mainsail`
 - Downloaded recommended Mainsail-Config: Yes
 - Downloaded latest Mainsail release
 - Created config backup: `~/kiauh_backups/printer_data/config_20251125-192139`
@@ -205,15 +205,15 @@ All services should show "active (running)" in green.
   ```
 
 ### Step 6: Verify Installation
-✅ All services active and connected:
+[DONE] All services active and connected:
 - Klipper: Connected to MCU, temps reading normally
 - Moonraker: Connected to Klipper (status: "ready")
 - nginx: Serving Mainsail on port 80
 
 ### Step 7: Test Web Interface
-✅ Accessed http://10.0.0.139
-✅ Mainsail loaded successfully
-✅ Printer controls functional - **verified by homing printer**
+[DONE] Accessed http://10.0.0.139
+[DONE] Mainsail loaded successfully
+[DONE] Printer controls functional - **verified by homing printer**
 
 ---
 
@@ -280,11 +280,11 @@ sudo systemctl restart moonraker klipper
 
 ## Next Steps
 
-1. ✅ Verify KIAUH installation
-2. ✅ Install Moonraker via KIAUH
-3. ✅ Install Mainsail via KIAUH
-4. ✅ Fix configuration path issues
-5. ✅ Verify all services running
-6. ✅ Test web interface and printer controls
-7. ⏳ **Begin printer calibration** (PID tuning, bed mesh, input shaper, etc.)
+1. [DONE] Verify KIAUH installation
+2. [DONE] Install Moonraker via KIAUH
+3. [DONE] Install Mainsail via KIAUH
+4. [DONE] Fix configuration path issues
+5. [DONE] Verify all services running
+6. [DONE] Test web interface and printer controls
+7. [PENDING] **Begin printer calibration** (PID tuning, bed mesh, input shaper, etc.)
 

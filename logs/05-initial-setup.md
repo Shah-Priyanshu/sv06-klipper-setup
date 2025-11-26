@@ -1,7 +1,7 @@
 # Initial Setup - Hardware Decision
 
 **Date:** 2025-11-16  
-**Status:** ✅ COMPLETED - Decided on fresh Debian 13 installation
+**Status:** [DONE] COMPLETED - Decided on fresh Debian 13 installation
 
 ---
 
@@ -12,10 +12,10 @@ After discovering critical disk/filesystem issues in log 04b, a decision was nee
 ## Problem Summary
 
 The existing Debian 11 installation on the HP Pavilion 15-cc1xx laptop had:
-- ❌ Filesystem corruption (Input/output errors on system binaries)
-- ❌ Bus errors when running commands
-- ❌ Unreliable dual-disk configuration (HDD + SSD with EFI boot issues)
-- ❌ Unknown system state and configuration
+- [FAIL] Filesystem corruption (Input/output errors on system binaries)
+- [FAIL] Bus errors when running commands
+- [FAIL] Unreliable dual-disk configuration (HDD + SSD with EFI boot issues)
+- [FAIL] Unknown system state and configuration
 
 ## Hardware Review
 
@@ -45,9 +45,9 @@ The existing Debian 11 installation on the HP Pavilion 15-cc1xx laptop had:
 - Use Raspberry Pi 4 instead
 
 **Chosen Path:**
-- ✅ Remove SSD completely
-- ✅ Fresh Debian 13 installation on HDD only
-- ✅ Simple partition layout (EFI + root + swap on single drive)
+- [DONE] Remove SSD completely
+- [DONE] Fresh Debian 13 installation on HDD only
+- [DONE] Simple partition layout (EFI + root + swap on single drive)
 
 ## Storage Configuration Decision
 
@@ -121,9 +121,9 @@ Proceed to:
 ## Outcome
 
 This decision proved correct:
-- ✅ Debian 13 installation was smooth and successful
-- ✅ Single-HDD configuration eliminated all EFI boot issues
-- ✅ System has been stable and reliable for Klipper operation
-- ✅ 232GB HDD provides plenty of space with room for growth
+- [DONE] Debian 13 installation was smooth and successful
+- [DONE] Single-HDD configuration eliminated all EFI boot issues
+- [DONE] System has been stable and reliable for Klipper operation
+- [DONE] 232GB HDD provides plenty of space with room for growth
 
 **Status:** Decision validated by successful installation and stable operation.

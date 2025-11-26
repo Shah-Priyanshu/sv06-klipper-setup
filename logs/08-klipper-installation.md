@@ -176,7 +176,7 @@ Choose either:
    # Output: inet 10.0.0.139/24 brd 10.0.0.255 scope global noprefixroute wlo1
    ```
 
-**Result:** ✅ Static IP 10.0.0.139 configured successfully. IP will no longer change.
+**Result:** [DONE] Static IP 10.0.0.139 configured successfully. IP will no longer change.
 
 ### SD Card Firmware Preparation
 
@@ -211,7 +211,7 @@ Choose either:
    sudo umount /media/pri/12AE-E2DE
    ```
 
-**Status:** ✅ SD card ready with fresh Klipper firmware (firmware.bin)
+**Status:** [DONE] SD card ready with fresh Klipper firmware (firmware.bin)
 
 ### Next Steps
 
@@ -258,7 +258,7 @@ heater_bed: temp=23.8
 extruder: temp=24.9
 ```
 
-✅ **Klipper firmware is running and communicating with MCU!**
+[DONE] **Klipper firmware is running and communicating with MCU!**
 
 ### Next Steps
 

@@ -1,19 +1,19 @@
 # OrcaSlicer Setup and Configuration
 
 **Date:** 2025-11-25  
-**Status:** ✅ COMPLETED  
-**Prerequisites:** ✅ Printer calibrated, Moonraker API accessible
+**Status:** [DONE] COMPLETED  
+**Prerequisites:** [DONE] Printer calibrated, Moonraker API accessible
 
 ---
 
 ## Installation Summary
 
-✅ **OrcaSlicer Installed:**
+[DONE] **OrcaSlicer Installed:**
 - **Platform:** Windows PC (not on Debian printer machine)
 - **Source:** https://github.com/OrcaSlicer/OrcaSlicer/releases
 - **Version:** Latest release from GitHub
 
-✅ **Configuration Completed:**
+[DONE] **Configuration Completed:**
 - Printer profile configured (Sovol SV06)
 - Moonraker connection established
 - Start/End G-code configured
@@ -147,7 +147,7 @@ Name: SV06 Klipper
 ```
 
 **Connection Test:**
-- Status: ✅ Connected successfully
+- Status: [DONE] Connected successfully
 - OrcaSlicer can communicate with Moonraker
 - File uploads enabled
 
@@ -378,9 +378,9 @@ Brim Width: 0mm (not needed with mesh leveling)
 - Perfect first layer height maintained
 
 **What NOT to configure in slicer:**
-- ❌ Z-offset adjustment (already in printer)
-- ❌ Manual bed leveling compensation
-- ❌ Temperature PID values (in Klipper)
+- [FAIL] Z-offset adjustment (already in printer)
+- [FAIL] Manual bed leveling compensation
+- [FAIL] Temperature PID values (in Klipper)
 
 ---
 
@@ -682,7 +682,7 @@ Physical Printers: physical_printer/*.json
 
 ## Post-Configuration Summary
 
-✅ **OrcaSlicer Configured:**
+[DONE] **OrcaSlicer Configured:**
 - Installed on Windows PC (not printer laptop)
 - Connected to Moonraker at 10.0.0.139:7125
 - Printer profile: Sovol SV06 (220x220x250mm)
@@ -691,7 +691,7 @@ Physical Printers: physical_printer/*.json
 - PLA filament profile created
 - Ready to slice and print
 
-✅ **Workflow Established:**
+[DONE] **Workflow Established:**
 - Slice on Windows PC
 - Upload via network to Moonraker
 - Start/monitor prints via Mainsail web interface
@@ -701,11 +701,11 @@ Physical Printers: physical_printer/*.json
 
 ## Next Steps
 
-1. ✅ OrcaSlicer configured with calibrated values
-2. ✅ Moonraker connection working
-3. ⏳ **Test slice and upload** (pending)
-4. ⏳ **First test print** (when ready)
-5. ⏳ Fine-tune settings based on print results
-6. ⏳ Create filament-specific profiles as needed
+1. [DONE] OrcaSlicer configured with calibrated values
+2. [DONE] Moonraker connection working
+3. [PENDING] **Test slice and upload** (pending)
+4. [PENDING] **First test print** (when ready)
+5. [PENDING] Fine-tune settings based on print results
+6. [PENDING] Create filament-specific profiles as needed
 
 **System fully operational and ready for 3D printing!**

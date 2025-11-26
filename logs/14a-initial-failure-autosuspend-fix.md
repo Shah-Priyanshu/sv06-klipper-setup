@@ -1,7 +1,7 @@
 # USB Communication Failure - Initial Incident & Autosuspend Fix
 
 **Date:** 2025-11-25 22:09-22:28  
-**Status:** ✅ RESOLVED (Temporarily - recurred later)  
+**Status:** [DONE] RESOLVED (Temporarily - recurred later)  
 **Issue:** MCU communication lost during G28 (home all) command
 
 > **Note:** This is Part 1 of 4. See [14-usb-troubleshooting-index.md](14-usb-troubleshooting-index.md) for the complete troubleshooting journey.
@@ -144,11 +144,11 @@ No such file or directory
 
 ### Attempted Recovery Actions
 
-1. ✅ **FIRMWARE_RESTART button in Mainsail** - No response (Klipper stuck in error state)
-2. ✅ **systemctl restart klipper.service** - Failed (USB device I/O error)
-3. ✅ **USB driver reset** (`rmmod ch341 && modprobe ch341`) - Device not binding
-4. ✅ **udevadm trigger** - No effect
-5. ✅ **Physical USB cable reconnection** - SUCCESS
+1. [DONE] **FIRMWARE_RESTART button in Mainsail** - No response (Klipper stuck in error state)
+2. [DONE] **systemctl restart klipper.service** - Failed (USB device I/O error)
+3. [DONE] **USB driver reset** (`rmmod ch341 && modprobe ch341`) - Device not binding
+4. [DONE] **udevadm trigger** - No effect
+5. [DONE] **Physical USB cable reconnection** - SUCCESS
 
 ### Required Action
 
@@ -203,11 +203,11 @@ sudo udevadm trigger
 ### Test Results
 
 **Test 1: Single G28 Homing**
-- ✅ Result: SUCCESS
+- [DONE] Result: SUCCESS
 - No disconnection errors
 
 **Test 2: Stress Test - 3 Consecutive G28 Cycles**
-- ✅ Result: ALL SUCCESSFUL
+- [DONE] Result: ALL SUCCESSFUL
 - `send_seq=2453`, `receive_seq=2453` (perfect packet sync)
 - Printer state: "ready" (operational)
 
@@ -231,10 +231,10 @@ USB autosuspend: -1 (disabled)
 
 ### Actions Taken
 
-1. ✅ **Physical USB reconnection** - Restored device binding
-2. ✅ **Klipper service restart** - MCU communication restored
-3. ✅ **Permanent USB autosuspend disable** - Created udev rule
-4. ✅ **Stability testing** - 4 homing cycles completed without errors
+1. [DONE] **Physical USB reconnection** - Restored device binding
+2. [DONE] **Klipper service restart** - MCU communication restored
+3. [DONE] **Permanent USB autosuspend disable** - Created udev rule
+4. [DONE] **Stability testing** - 4 homing cycles completed without errors
 
 ### Files Modified
 
@@ -333,10 +333,10 @@ USB autosuspend: -1 (disabled)
 
 ### Success Criteria
 
-- ✅ No "Lost communication" errors during 5 consecutive homing cycles
-- ✅ `bytes_retransmit` counter stays at 0 or low values (< 100)
-- ✅ No USB I/O errors in system logs
-- ✅ Printer can complete full homing sequence while heating
+- [DONE] No "Lost communication" errors during 5 consecutive homing cycles
+- [DONE] `bytes_retransmit` counter stays at 0 or low values (< 100)
+- [DONE] No USB I/O errors in system logs
+- [DONE] Printer can complete full homing sequence while heating
 
 ---
 
@@ -356,7 +356,7 @@ USB autosuspend: -1 (disabled)
 
 ---
 
-**Status:** ✅ RESOLVED (Temporarily)
+**Status:** [DONE] RESOLVED (Temporarily)
 
 **Note:** This fix resolved the immediate issue, but problems recurred later. See:
 - [14b-usb-port-change.md](14b-usb-port-change.md) - Second failure and USB port change

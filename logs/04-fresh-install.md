@@ -12,10 +12,10 @@
 
 ## Prerequisites Check
 
-✅ Python 3.10.12 installed
-✅ Git 2.34.1 installed
-✅ Old installation completely removed
-✅ System clean and ready
+[DONE] Python 3.10.12 installed
+[DONE] Git 2.34.1 installed
+[DONE] Old installation completely removed
+[DONE] System clean and ready
 
 ---
 
@@ -110,7 +110,7 @@ ls -la ~/printer_data/config/
 ## Next Steps
 
 After successful installation:
-1. ✅ Verify services are running
-2. ⏳ Build Klipper firmware for SV06
-3. ⏳ Flash firmware to printer
-4. ⏳ Configure printer.cfg
+1. [DONE] Verify services are running
+2. [PENDING] Build Klipper firmware for SV06
+3. [PENDING] Flash firmware to printer
+4. [PENDING] Configure printer.cfg

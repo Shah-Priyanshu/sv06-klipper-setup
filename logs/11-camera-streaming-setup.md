@@ -1,32 +1,32 @@
 # Camera Streaming Setup with Crowsnest
 
 **Date:** 2025-11-25  
-**Status:** ✅ COMPLETED  
-**Prerequisites:** ✅ Klipper, Moonraker, and Mainsail installed and functional  
+**Status:** [DONE] COMPLETED  
+**Prerequisites:** [DONE] Klipper, Moonraker, and Mainsail installed and functional  
 **Installation Method:** KIAUH (Klipper Installation And Update Helper)
 
 ---
 
 ## Installation Summary
 
-✅ **Successfully Installed:**
+[DONE] **Successfully Installed:**
 - **Crowsnest** - Multi-camera streaming daemon for Klipper
 - **ustreamer** - MJPEG streaming engine
 - Webcam configuration in Mainsail
 
-✅ **Camera Detected:**
+[DONE] **Camera Detected:**
 - **Model:** Sunplus SPCA2281 Web Camera (USB)
 - **Device:** `/dev/video0` (XWF-1080P)
 - **Resolution:** 640x480 @ 15fps
 - **Stream Port:** 8080
 
-✅ **Services Status:**
+[DONE] **Services Status:**
 - Crowsnest: Active and streaming
 - Klipper: Active and enabled for boot
 - Moonraker: Active and connected
 - nginx: Active
 
-✅ **Web Interface:**
+[DONE] **Web Interface:**
 - Camera feed visible in Mainsail
 - Stream URL: http://10.0.0.139/webcam/?action=stream
 - Snapshot URL: http://10.0.0.139/webcam/?action=snapshot
@@ -122,7 +122,7 @@ Checked service status:
 systemctl status crowsnest
 ```
 
-**Result:** ✅ Active (running) since 20:16:24, streaming from `/dev/video0`
+**Result:** [DONE] Active (running) since 20:16:24, streaming from `/dev/video0`
 
 **Stream Details:**
 - Mode: ustreamer
@@ -170,7 +170,7 @@ Access-Control-Allow-Origin: *
 Access-Control-Allow-Credentials: true
 ```
 
-✅ Camera stream accessible and responding
+[DONE] Camera stream accessible and responding
 
 ### Step 6: Configure Webcam in Mainsail
 
@@ -216,7 +216,7 @@ systemctl status klipper     # Output: inactive (dead)
    # Output: "klippy_state": "ready"
    ```
 
-**Result:** ✅ All services restored and functional
+**Result:** [DONE] All services restored and functional
 
 ### Step 8: Final Verification
 
@@ -230,12 +230,12 @@ systemctl is-enabled klipper moonraker nginx crowsnest
 ```
 
 **Final Status:**
-- ✅ Klipper: Running, enabled, connected to MCU
-- ✅ Moonraker: Running, enabled, connected to Klipper
-- ✅ nginx: Running, enabled, serving Mainsail
-- ✅ Crowsnest: Running, enabled, streaming camera
-- ✅ Mainsail: Connected, camera feed visible
-- ✅ All services will auto-start on boot
+- [DONE] Klipper: Running, enabled, connected to MCU
+- [DONE] Moonraker: Running, enabled, connected to Klipper
+- [DONE] nginx: Running, enabled, serving Mainsail
+- [DONE] Crowsnest: Running, enabled, streaming camera
+- [DONE] Mainsail: Connected, camera feed visible
+- [DONE] All services will auto-start on boot
 
 ---
 
@@ -436,9 +436,9 @@ tail -f ~/printer_data/logs/klippy.log
 
 ## Next Steps
 
-1. ✅ Camera streaming functional
-2. ✅ All Klipper ecosystem services running
-3. ✅ Web interface fully operational with camera
-4. ⏳ **Ready for printer calibration** (PID tuning, bed mesh, etc.)
+1. [DONE] Camera streaming functional
+2. [DONE] All Klipper ecosystem services running
+3. [DONE] Web interface fully operational with camera
+4. [PENDING] **Ready for printer calibration** (PID tuning, bed mesh, etc.)
 
 **Camera setup complete!**

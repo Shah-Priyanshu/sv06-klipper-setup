@@ -1,7 +1,7 @@
 # USB Communication Failure - Port 2 Issue & Port Reassignment
 
 **Date:** 2025-11-25 22:30-22:40  
-**Status:** ✅ RESOLVED (Temporarily - root cause was different)  
+**Status:** [DONE] RESOLVED (Temporarily - root cause was different)  
 **Issue:** Second communication failure, traced to faulty USB Port 2
 
 > **Note:** This is Part 2 of 4. See [14-usb-troubleshooting-index.md](14-usb-troubleshooting-index.md) for the complete troubleshooting journey.
@@ -70,13 +70,13 @@ Port 003: Dev 004, Built-in HP camera (unchanged)
 
 ### Test 1: Single G28 Homing
 
-- ✅ Result: SUCCESS
+- [DONE] Result: SUCCESS
 - `bytes_retransmit=0` (perfect communication)
 - No disconnection errors
 
 ### Test 2: Stress Test - 5 Consecutive G28 Cycles
 
-- ✅ Result: ALL SUCCESSFUL
+- [DONE] Result: ALL SUCCESSFUL
 - `bytes_retransmit=0` throughout entire test
 - `send_seq=3474`, `receive_seq=3474` (perfect packet sync)
 - `print_time` advanced from 90.269 to 110.046 (all homing completed)
@@ -109,10 +109,10 @@ Port 003: Dev 004, Built-in HP camera (unchanged)
 
 ### Initial Conclusion (Later Proven Wrong)
 
-- ❌ **NOT** a CH340 chip problem
-- ❌ **NOT** an electrical noise problem
-- ❌ **NOT** a USB power management problem
-- ✅ **HYPOTHESIS** - Hardware failure in laptop's USB Port 2
+- [FAIL] **NOT** a CH340 chip problem
+- [FAIL] **NOT** an electrical noise problem
+- [FAIL] **NOT** a USB power management problem
+- [DONE] **HYPOTHESIS** - Hardware failure in laptop's USB Port 2
 
 **Probable Cause (Suspected):**
 - Worn/damaged USB port connector
@@ -139,16 +139,16 @@ Port 003: Dev 004, Built-in HP camera (unchanged)
 ## Status After Port Change
 
 **Hardware Configuration:**
-- ✅ Printer on Port 1 (stable, verified)
-- ✅ Camera on USB-C Hub (isolated, stable)
-- ✅ USB autosuspend disabled (preventive measure)
-- ✅ Tested with 5+ homing cycles (no failures)
+- [DONE] Printer on Port 1 (stable, verified)
+- [DONE] Camera on USB-C Hub (isolated, stable)
+- [DONE] USB autosuspend disabled (preventive measure)
+- [DONE] Tested with 5+ homing cycles (no failures)
 
 **Recommendations:**
-- ⚠️ **Avoid using USB Port 2** for any critical devices
-- ✅ Continue using Port 1 for printer (proven stable)
-- ✅ Consider marking Port 2 with tape/label ("DO NOT USE - FAULTY")
-- 📝 If Port 1 eventually fails, consider external USB hub or new host machine
+- [WARN] **Avoid using USB Port 2** for any critical devices
+- [DONE] Continue using Port 1 for printer (proven stable)
+- [DONE] Consider marking Port 2 with tape/label ("DO NOT USE - FAULTY")
+- [TODO] If Port 1 eventually fails, consider external USB hub or new host machine
 
 ---
 
@@ -182,7 +182,7 @@ The port change coincidentally worked temporarily because:
 
 ---
 
-**Status:** ✅ RESOLVED (Temporarily)
+**Status:** [DONE] RESOLVED (Temporarily)
 
 **Actual Outcome:** Port 2 may not have been faulty at all. The real issues were:
 1. Software compatibility (pyserial)

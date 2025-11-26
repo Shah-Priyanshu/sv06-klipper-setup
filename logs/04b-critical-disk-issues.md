@@ -27,8 +27,8 @@ tmpfs           5.0M  4.0K  5.0M   1% /run/lock
 tmpfs           783M  136K  783M   1% /run/user/1000
 ```
 
-✅ Disk space is fine (182GB available)
-❌ System binaries are corrupted or disk is failing
+[DONE] Disk space is fine (182GB available)
+[FAIL] System binaries are corrupted or disk is failing
 
 ---
 

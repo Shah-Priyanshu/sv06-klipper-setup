@@ -37,7 +37,7 @@ This pattern indicated corrupted or missing firmware on the printer's STM32F103 
 3. Power cycled printer with SD card inserted
 4. Waited 30 seconds
 
-**Result:** ❌ FAILED
+**Result:** [FAIL] FAILED
 - File remained as `firmware.bin` (not renamed to `firmware.CUR`)
 - SD card bootloader did not process the file
 - Printer continued to boot loop
@@ -61,7 +61,7 @@ This pattern indicated corrupted or missing firmware on the printer's STM32F103 
 2. Copied `~/klipper/out/klipper.bin` to SD card as `firmware.bin`
 3. Power cycled printer
 
-**Result:** ❌ FAILED
+**Result:** [FAIL] FAILED
 - File remained as `firmware.bin`
 - No evidence of bootloader processing the file
 
@@ -82,7 +82,7 @@ This pattern indicated corrupted or missing firmware on the printer's STM32F103 
 2. Power cycled printer multiple times
 3. Waited 30+ seconds each time
 
-**Result:** ❌ FAILED
+**Result:** [FAIL] FAILED
 - No files were renamed to `.CUR`
 - Bootloader did not process any filename variant
 
@@ -100,7 +100,7 @@ This pattern indicated corrupted or missing firmware on the printer's STM32F103 
 1. Waited for printer to appear as `/dev/ttyUSB0`
 2. Ran: `stm32flash -g 0x7000 -b 115200 -w klipper.bin /dev/ttyUSB0`
 
-**Result:** ❌ FAILED
+**Result:** [FAIL] FAILED
 ```
 Error probing interface "serial_posix"
 Cannot handle device "/dev/ttyUSB0"
@@ -124,7 +124,7 @@ Failed to open port: /dev/ttyUSB0
 2. Copied pre-compiled firmware to SD card
 3. Power cycled printer
 
-**Result:** ❌ FAILED (at SD card level)
+**Result:** [FAIL] FAILED (at SD card level)
 - File remained as `firmware.bin`
 - SD card bootloader did not process it
 
@@ -152,7 +152,7 @@ Failed to open port: /dev/ttyUSB0
 7. Verified SD card contained no other files
 8. Power cycled printer with 60 second wait
 
-**Result:** ❌ FAILED (at SD card level)
+**Result:** [FAIL] FAILED (at SD card level)
 - File remained as `firmware.bin`
 - SD card bootloader still did not process it
 
@@ -211,10 +211,10 @@ extruder: target=0 temp=24.9 pwm=0.000
 ```
 
 **Key Indicators:**
-- ✅ MCU frequency: `freq=72005522` (STM32 is running at ~72MHz)
-- ✅ Temperature readings: Bed = 23.8°C, Hotend = 24.9°C
-- ✅ Serial communication: Bytes read/write successful
-- ✅ No error messages in logs
+- [DONE] MCU frequency: `freq=72005522` (STM32 is running at ~72MHz)
+- [DONE] Temperature readings: Bed = 23.8°C, Hotend = 24.9°C
+- [DONE] Serial communication: Bytes read/write successful
+- [DONE] No error messages in logs
 
 ---
 
@@ -415,7 +415,7 @@ The SD card bootloader method failed for one or more of these reasons:
 6. Restarted Klipper service
 7. Verified communication via Klipper logs
 
-**Result:** ✅ SUCCESS
+**Result:** [DONE] SUCCESS
 - Klipper communicating with MCU
 - Temperature sensors working
 - Ready for Moonraker/Mainsail installation
@@ -543,6 +543,6 @@ Sensors: Bed thermistor, Hotend thermistor responding
 
 ## Status
 
-✅ **RESOLVED**: Klipper firmware functional and communicating  
+[DONE] **RESOLVED**: Klipper firmware functional and communicating  
 ⏭️ **NEXT**: Install Moonraker and Mainsail web interface  
 

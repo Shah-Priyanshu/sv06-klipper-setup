@@ -6,7 +6,7 @@ A complete documentation repository for converting a **Sovol SV06** 3D printer t
 
 This repository documents the entire journey of "Klipperizing" a Sovol SV06, from initial planning through troubleshooting to a fully operational print server. It serves as both a reference guide and a detailed record of configuration decisions, challenges overcome, and lessons learned.
 
-**Status:** ✅ **System Operational and Print-Ready**
+**Status:** [DONE] **System Operational and Print-Ready**
 
 ## Hardware Configuration
 
@@ -15,7 +15,7 @@ This repository documents the entire journey of "Klipperizing" a Sovol SV06, fro
 - **MCU:** STM32F103 @ 72MHz
 - **USB Interface:** CH340 serial adapter
 - **Serial Device:** `/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0`
-- **USB Port:** Port 1 (⚠️ Port 2 is faulty - see [log 14](logs/14-usb-communication-failure.md))
+- **USB Port:** Port 1 ([WARN] Port 2 is faulty - see [log 14](logs/14-usb-communication-failure.md))
 
 ### Print Server (Laptop)
 - **Model:** HP Pavilion 15-cc1xx
@@ -122,20 +122,20 @@ configs/
 
 ## System Calibration Status
 
-### Completed Calibrations ✅
+### Completed Calibrations [DONE]
 - **PID Tuning (Bed):** Kp=69.167, Ki=1.210, Kd=988.229
 - **PID Tuning (Hotend):** Kp=23.358, Ki=1.455, Kd=93.723
 - **Bed Mesh Leveling:** 5x5 grid, range -0.565mm to +0.401mm
 - **Z-Offset:** 1.755mm (paper test method)
 
 ### Optional Advanced Calibrations
-- ⏳ Pressure Advance tuning (fine-tune extrusion)
-- ⏳ Input Shaper calibration (requires ADXL345 accelerometer)
-- ⏳ Flow rate calibration (material-specific)
+- [PENDING] Pressure Advance tuning (fine-tune extrusion)
+- [PENDING] Input Shaper calibration (requires ADXL345 accelerometer)
+- [PENDING] Flow rate calibration (material-specific)
 
 ## Known Issues and Solutions
 
-### ⚠️ Critical: USB Port 2 is Faulty
+### [WARN] Critical: USB Port 2 is Faulty
 **Issue:** USB Port 2 on the laptop causes intermittent device disconnections and I/O errors.
 
 **Solution:** Use **USB Port 1** for the printer. Port 2 should be avoided for critical devices.

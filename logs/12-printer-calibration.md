@@ -1,14 +1,14 @@
 # Printer Calibration
 
 **Date:** 2025-11-25  
-**Status:** ✅ COMPLETED (Essential Calibrations)  
-**Prerequisites:** ✅ Klipper, Moonraker, Mainsail, and camera streaming functional
+**Status:** [DONE] COMPLETED (Essential Calibrations)  
+**Prerequisites:** [DONE] Klipper, Moonraker, Mainsail, and camera streaming functional
 
 ---
 
 ## Calibration Summary
 
-✅ **Essential Calibrations Completed:**
+[DONE] **Essential Calibrations Completed:**
 - **PID Tune Bed** - Temperature control optimized
 - **PID Tune Hotend** - Nozzle temperature control optimized
 - **Bed Mesh** - Surface mapping for auto-leveling
@@ -39,7 +39,7 @@ PID_CALIBRATE HEATER=heater_bed TARGET=60
 - `pid_Ki = 1.210`
 - `pid_Kd = 988.229`
 
-**Status:** ✅ Saved to printer.cfg
+**Status:** [DONE] Saved to printer.cfg
 
 **What This Does:**
 Calibrates the PID control algorithm for the heated bed, ensuring stable temperature without overshooting or oscillating. These values tell Klipper how aggressively to heat and how to maintain temperature.
@@ -61,7 +61,7 @@ PID_CALIBRATE HEATER=extruder TARGET=200
 - `pid_Ki = 1.455`
 - `pid_Kd = 93.723`
 
-**Status:** ✅ Saved to printer.cfg
+**Status:** [DONE] Saved to printer.cfg
 
 **What This Does:**
 Calibrates temperature control for the hotend/nozzle. Ensures accurate and stable extrusion temperature, critical for consistent print quality.
@@ -101,7 +101,7 @@ min_y = 6.0
 max_y = 203.0
 ```
 
-**Status:** ✅ Saved to printer.cfg as "default" profile
+**Status:** [DONE] Saved to printer.cfg as "default" profile
 
 **Mesh Analysis:**
 - **Range:** -0.565mm (back-left corner) to +0.401mm (back-right corner)
@@ -140,7 +140,7 @@ PROBE_CALIBRATE
 **Result:**
 - `z_offset = 1.755`
 
-**Status:** ✅ Saved to printer.cfg
+**Status:** [DONE] Saved to printer.cfg
 
 **What This Does:**
 Sets the exact distance between the probe trigger point and the nozzle tip when it touches the bed. This is THE most critical calibration for first layer adhesion. Value of 1.755mm means the nozzle is 1.755mm lower than where the probe triggers.
@@ -371,10 +371,10 @@ PROBE_CALIBRATE
 
 ## Next Steps
 
-1. ✅ Essential calibrations complete
-2. ⏳ **Install OrcaSlicer on Debian machine**
-3. ⏳ Configure printer profile with calibrated values
-4. ⏳ Set up Moonraker connection for direct upload
-5. ⏳ First real print to verify calibration
+1. [DONE] Essential calibrations complete
+2. [PENDING] **Install OrcaSlicer on Debian machine**
+3. [PENDING] Configure printer profile with calibrated values
+4. [PENDING] Set up Moonraker connection for direct upload
+5. [PENDING] First real print to verify calibration
 
 **Printer is now ready for slicing and printing!**

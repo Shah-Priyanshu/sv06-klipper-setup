@@ -48,6 +48,6 @@ If prompted for credentials, use a Personal Access Token (not password):
 
 ## Status
 
-- ✅ Local git repository initialized
-- ⏳ Waiting for GitHub repo creation
-- ⏳ Waiting for first push
+- [DONE] Local git repository initialized
+- [PENDING] Waiting for GitHub repo creation
+- [PENDING] Waiting for first push

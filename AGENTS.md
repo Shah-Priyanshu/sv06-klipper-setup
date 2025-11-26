@@ -48,7 +48,7 @@ This ensures you have full context about:
 - **Document Everything:** Keep detailed records of all configuration changes, commands run, and decisions made
 - **Run Verification Commands:** When guiding the user through a process, run verification commands via SSH automatically to check results. Do not ask the user to run simple checks - be proactive and verify things yourself. Only ask the user to perform actions that require physical interaction (like inserting SD cards, pressing buttons, etc.) or viewing output directly on their terminal.
 
-## ⚠️ CRITICAL: User-Guided Installation Protocol
+## [WARN] CRITICAL: User-Guided Installation Protocol
 
 **IMPORTANT: When performing Klipper ecosystem installations or modifications:**
 
@@ -102,49 +102,49 @@ Agent: [Automatically runs: sudo apt install -y nginx]
 **Last Updated:** 2025-11-25
 
 ### Completed:
-- ✅ Debian 13 installed with HDD-only configuration (no EFI boot issues)
-- ✅ Clamshell mode enabled (headless operation)
-- ✅ SSH configured with key authentication (passwordless)
-- ✅ System updated and build dependencies installed
-- ✅ Static IP configured: 10.0.0.139
-- ✅ Klipper installed and running
+- [DONE] Debian 13 installed with HDD-only configuration (no EFI boot issues)
+- [DONE] Clamshell mode enabled (headless operation)
+- [DONE] SSH configured with key authentication (passwordless)
+- [DONE] System updated and build dependencies installed
+- [DONE] Static IP configured: 10.0.0.139
+- [DONE] Klipper installed and running
   - Python environment: `~/klippy-env`
   - Repository: `~/klipper`
   - Service: Active, connected to MCU
   - MCU: STM32F103 @ 72MHz via CH340 USB
   - Serial: `/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0`
-- ✅ Klipper firmware flashed (or working with existing firmware)
-- ✅ Moonraker v0.9.3-128-g960e933 installed via KIAUH
+- [DONE] Klipper firmware flashed (or working with existing firmware)
+- [DONE] Moonraker v0.9.3-128-g960e933 installed via KIAUH
   - Repository: `~/moonraker`
   - Python environment: `~/moonraker-env`
   - Service: Active, connected to Klipper
   - Port: 7125
-- ✅ Mainsail web interface installed via KIAUH
+- [DONE] Mainsail web interface installed via KIAUH
   - Location: `~/mainsail`
   - Access: http://10.0.0.139
   - Status: Fully functional
-- ✅ Mainsail-Config installed
+- [DONE] Mainsail-Config installed
   - Location: `~/mainsail-config`
   - Config: `~/printer_data/config/mainsail.cfg` (symlink)
-- ✅ nginx web server installed and configured
+- [DONE] nginx web server installed and configured
   - Serving Mainsail on port 80
   - Proxying Moonraker API
-- ✅ Configuration issues fixed
+- [DONE] Configuration issues fixed
   - Fixed `/home/pi/` to `/home/pri/` paths in configs
   - Moonraker socket path corrected
   - Virtual SD card path corrected
-- ✅ Printer controls verified (homing successful)
-- ✅ Camera streaming configured with Crowsnest
+- [DONE] Printer controls verified (homing successful)
+- [DONE] Camera streaming configured with Crowsnest
   - XWF-1080P USB camera on `/dev/video0`
   - Accessible at http://10.0.0.139/webcam/
   - Visible in Mainsail interface
-- ✅ Printer calibration completed
+- [DONE] Printer calibration completed
   - PID tuning: Bed (Kp=69.167, Ki=1.210, Kd=988.229)
   - PID tuning: Hotend (Kp=23.358, Ki=1.455, Kd=93.723)
   - Bed mesh: 5x5 grid, range -0.565mm to +0.401mm
   - Z-offset: 1.755mm (paper test method)
   - All values saved to printer.cfg
-- ✅ OrcaSlicer configured (Windows PC)
+- [DONE] OrcaSlicer configured (Windows PC)
   - Connected to Moonraker at 10.0.0.139:7125
   - Sovol SV06 profile with calibrated values
   - Start/End G-code with Klipper commands
@@ -159,13 +159,13 @@ Agent: [Automatically runs: sudo apt install -y nginx]
 - **Additional:** `~/printer_data/config/cfgs/` (modular configs)
 
 ### System Ready for Printing:
-- ✅ All services running and enabled for auto-start
-- ✅ Web interface accessible with camera feed
-- ✅ Printer fully calibrated
-- ✅ Slicer configured and connected
+- [DONE] All services running and enabled for auto-start
+- [DONE] Web interface accessible with camera feed
+- [DONE] Printer fully calibrated
+- [DONE] Slicer configured and connected
 
 ### Next Steps (Optional Advanced Calibration):
-- ⏳ **First test print** to verify all systems
-- ⏳ **Pressure Advance tuning** (fine-tune extrusion)
-- ⏳ **Input Shaper calibration** (requires ADXL345 accelerometer)
-- ⏳ **Flow rate calibration** (material-specific)
+- [PENDING] **First test print** to verify all systems
+- [PENDING] **Pressure Advance tuning** (fine-tune extrusion)
+- [PENDING] **Input Shaper calibration** (requires ADXL345 accelerometer)
+- [PENDING] **Flow rate calibration** (material-specific)

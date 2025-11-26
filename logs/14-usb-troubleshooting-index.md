@@ -2,7 +2,7 @@
 
 **Date:** 2025-11-25  
 **Duration:** 22:09 - 23:42 (1 hour 33 minutes)  
-**Final Status:** ✅ FULLY RESOLVED  
+**Final Status:** [DONE] FULLY RESOLVED  
 **System:** Sovol SV06 on Debian 13 (Trixie) with Klipper
 
 ---
@@ -25,21 +25,21 @@ This document indexes the complete troubleshooting journey for USB communication
 **Time:** 22:09 - 22:28  
 **Issue:** First MCU communication failure during homing  
 **Solution:** Disabled USB autosuspend via udev rule  
-**Result:** ✅ Temporarily resolved (recurred later)
+**Result:** [DONE] Temporarily resolved (recurred later)
 
 ### Part 2: USB Port Change
 **File:** [14b-usb-port-change.md](14b-usb-port-change.md)  
 **Time:** 22:30 - 22:40  
 **Issue:** Second failure, suspected faulty USB Port 2  
 **Solution:** Moved printer from Port 2 to Port 1  
-**Result:** ✅ Temporarily resolved (root cause was different)
+**Result:** [DONE] Temporarily resolved (root cause was different)
 
 ### Part 3: Python 3.13 / pyserial Compatibility
 **File:** [14c-pyserial-compatibility.md](14c-pyserial-compatibility.md)  
 **Time:** 22:57  
 **Issue:** AttributeError: 'Serial' object has no attribute 'pipe_abort_read_w'  
 **Solution:** Upgraded pyserial from 3.4 to 3.5  
-**Result:** ✅ Resolved software compatibility issue  
+**Result:** [DONE] Resolved software compatibility issue  
 **Duration:** ~5 minutes
 
 ### Part 4: USB Power Delivery Fix (FINAL RESOLUTION)
@@ -47,7 +47,7 @@ This document indexes the complete troubleshooting journey for USB communication
 **Time:** 23:30 - 23:42  
 **Issue:** MCU disconnects during combined heating + homing (high electrical load)  
 **Solution:** Cut +5V wire in USB cable (data-only connection)  
-**Result:** ✅ FULLY RESOLVED - Production ready  
+**Result:** [DONE] FULLY RESOLVED - Production ready  
 **Testing:** 7 comprehensive tests, all passed
 
 ---
@@ -137,7 +137,7 @@ sudo systemctl restart klipper
 **Testing:**
 - 7 comprehensive tests conducted
 - 13+ minutes continuous operation under full load
-- All tests PASSED ✅
+- All tests PASSED [DONE]
 - `bytes_retransmit` stable at 9 (no new retransmits)
 
 **Outcome:** FULLY RESOLVED - System production-ready
@@ -180,10 +180,10 @@ If the same problem occurs on DIFFERENT USB ports under the SAME conditions, the
 Failures that ONLY occur under specific electrical loads are diagnostic gold:
 
 **Our Pattern:**
-- ✅ Works: Cold homing
-- ✅ Works: Bed heating alone
-- ✅ Works: Hotend heating alone
-- ❌ **FAILS:** Bed + Hotend + Homing (combined load)
+- [DONE] Works: Cold homing
+- [DONE] Works: Bed heating alone
+- [DONE] Works: Hotend heating alone
+- [FAIL] **FAILS:** Bed + Hotend + Homing (combined load)
 
 This pointed directly to power delivery as the culprit.
 
@@ -203,10 +203,10 @@ This metric was critical for diagnosing the USB power issue.
 
 **Modified USB Cable:**
 ```
-Pin 1: RED (+5V)   → ✂️ CUT - DISCONNECTED
-Pin 2: WHITE (D-)  → ✅ CONNECTED
-Pin 3: GREEN (D+)  → ✅ CONNECTED
-Pin 4: BLACK (GND) → ✅ CONNECTED
+Pin 1: RED (+5V)   → [CUT] CUT - DISCONNECTED
+Pin 2: WHITE (D-)  → [DONE] CONNECTED
+Pin 3: GREEN (D+)  → [DONE] CONNECTED
+Pin 4: BLACK (GND) → [DONE] CONNECTED
 ```
 
 **Power Flow:**
@@ -301,9 +301,9 @@ Separating power from data eliminated electrical interference.
 ### USB Cable Modification Safety
 
 **Before you cut:**
-- ✅ Verify your printer MCU has onboard 5V regulation (most do)
-- ✅ Check board documentation
-- ✅ Understand you're making a permanent modification
+- [DONE] Verify your printer MCU has onboard 5V regulation (most do)
+- [DONE] Check board documentation
+- [DONE] Understand you're making a permanent modification
 
 **Alternative solutions:**
 - Buy a "USB data-only cable" (commercially available)
@@ -333,18 +333,18 @@ Separating power from data eliminated electrical interference.
 ## Success Metrics
 
 **Testing Results:**
-- ✅ 7 comprehensive tests passed
-- ✅ 7 successful homing cycles
-- ✅ 13+ minutes continuous operation
-- ✅ Zero communication failures
-- ✅ Zero new packet retransmissions
-- ✅ Perfect stability under full electrical load
+- [DONE] 7 comprehensive tests passed
+- [DONE] 7 successful homing cycles
+- [DONE] 13+ minutes continuous operation
+- [DONE] Zero communication failures
+- [DONE] Zero new packet retransmissions
+- [DONE] Perfect stability under full electrical load
 
 **System Status:**
-- ✅ Production-ready
-- ✅ Extensively tested
-- ✅ All issues resolved
-- ✅ Stable for printing
+- [DONE] Production-ready
+- [DONE] Extensively tested
+- [DONE] All issues resolved
+- [DONE] Stable for printing
 
 **Date Completed:** 2025-11-25 23:42
 
@@ -371,4 +371,4 @@ Separating power from data eliminated electrical interference.
 
 **Total Troubleshooting Time:** 1 hour 33 minutes  
 **Number of Different Root Causes:** 3  
-**Final Status:** ✅ FULLY RESOLVED
+**Final Status:** [DONE] FULLY RESOLVED

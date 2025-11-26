@@ -6,7 +6,7 @@
 Completely remove the existing Klipper installation to start fresh with proper documentation.
 
 ## Pre-removal Backup
-✅ Saved current printer.cfg to `configs/backup-old-printer.cfg`
+[DONE] Saved current printer.cfg to `configs/backup-old-printer.cfg`
 
 ## Important Notes
 - **Serial ID preserved:** `/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0`
@@ -92,18 +92,18 @@ Removed /etc/systemd/system/multi-user.target.wants/moonraker.service.
 
 ### Main Directories Removed
 ```
-✅ ~/klipper
-✅ ~/moonraker
-✅ ~/mainsail
-✅ ~/fluidd
-✅ ~/klipper_logs
-✅ ~/printer_data
-✅ ~/mainsail-config
-✅ ~/moonraker-timelapse
-✅ ~/octoeverywhere
-✅ ~/octoeverywhere-system
-✅ ~/kiauh
-✅ ~/klippy-env
+[DONE] ~/klipper
+[DONE] ~/moonraker
+[DONE] ~/mainsail
+[DONE] ~/fluidd
+[DONE] ~/klipper_logs
+[DONE] ~/printer_data
+[DONE] ~/mainsail-config
+[DONE] ~/moonraker-timelapse
+[DONE] ~/octoeverywhere
+[DONE] ~/octoeverywhere-system
+[DONE] ~/kiauh
+[DONE] ~/klippy-env
 ```
 
 ### Remaining Files Found
@@ -115,7 +115,7 @@ drwxrwxr-x  4 user user     4096 Jun 16  2024 octoeverywhere-env
 
 ### Services Check
 ```
-✅ No klipper or moonraker services running
+[DONE] No klipper or moonraker services running
 ```
 
 ## Final Cleanup
@@ -140,9 +140,9 @@ git version 2.34.1
 
 ## Status
 
-✅ **Complete removal successful!**
-✅ **System clean and ready for fresh installation**
-✅ **Python 3.10.12 available**
-✅ **Git 2.34.1 available**
+[DONE] **Complete removal successful!**
+[DONE] **System clean and ready for fresh installation**
+[DONE] **Python 3.10.12 available**
+[DONE] **Git 2.34.1 available**
 
 Ready to proceed with KIAUH installation.
