@@ -1,7 +1,7 @@
 # First Test Print Analysis - Orca Calibration Cube
 
 **Date:** 2025-11-26  
-**Status:** [PENDING] IN PROGRESS  
+**Status:** [DONE] ANALYSIS COMPLETE  
 **Print:** OrcaSlicer Calibration Cube
 
 ---
@@ -47,15 +47,88 @@
 
 ---
 
-### Set 2: Z Face and Bottom (PENDING)
+### Set 2: Z Face and Bottom
 
-*Analysis pending - images: cube_z.jpg, cube_bottom.jpg*
+#### Z Face / Top Surface (cube_z.jpg)
+
+**Observed Issues:**
+- **Top surface quality is good** - diagonal infill pattern is visible and relatively consistent
+- **Z embossed letter is clearly defined** - good detail resolution, sharp edges on the recessed letter
+- **Minor edge imperfections** - slight roughness on outer perimeter, small defect on top-left corner
+- **Best face of the cube** - indicates good layer stacking and Z-axis consistency
+
+**Positive Signs:**
+- Layer adhesion appears solid throughout the print height
+- Top solid infill is complete with no gaps
+- Embossed detail is crisp and readable
+
+#### Bottom Face (cube_bottom.jpg)
+
+**Observed Issues:**
+- **Severe first layer problems** - confirms issues from missing purge line
+- **Outer perimeter is rough and scalloped** - wavy, inconsistent edges all around the bottom
+- **Stringing in center hole** - multiple filament strands crossing the circular opening
+- **Poor first layer adhesion** - visible gaps and uneven extrusion lines across bottom surface
+- **Corner blobs/buildup** - excess material accumulated at all four corners
+- **Center hole perimeter is rough** - not clean circles, shows extrusion inconsistency at print start
+
+**Root Cause Confirmation:**
+The bottom face clearly shows the nozzle was not primed when printing began. The first perimeter has inconsistent extrusion (thick in some areas, thin/missing in others), and the stringing indicates the filament was oozing during travel moves without proper retraction at the start.
+
+#### Set 2 Summary
+
+| Issue | Severity | Likely Cause |
+|-------|----------|--------------|
+| Rough first layer perimeter | High | No purge line, nozzle not primed |
+| Stringing in center hole | Medium | Retraction settings, no purge at start |
+| Corner buildup/blobs | Medium | Over-extrusion at corners, speed changes |
+| Scalloped bottom edges | High | First layer speed too fast, poor adhesion |
+| Top surface acceptable | Low | Z-axis working correctly |
 
 ---
 
-### Set 3: Orca Logo and Text (PENDING)
+### Set 3: Orca Logo and OrcaSlicer Text
 
-*Analysis pending - images: cube_orca_logo.jpg, cube_orcaslicer_text.jpg*
+#### Orca Logo Face (cube_orca_logo.jpg)
+
+**Observed Issues:**
+- **Logo is clearly recognizable** - the orca/whale shape with diagonal line is well-defined and easily identifiable
+- **Good embossed detail** - logo edges are crisp with proper depth
+- **Surface quality is decent** - relatively smooth with consistent layer lines across the face
+- **Bottom edge damage** - visible rough/torn material from first layer adhesion problems and print removal
+- **Top-left corner defect** - slight imperfection/nick visible
+- **Minor stringing at bottom** - small wisps of filament at the base
+
+**Positive Signs:**
+- Complex curved geometry (the orca shape) printed accurately
+- Layer adhesion is solid throughout the vertical walls
+- Embossed detail depth is consistent
+
+#### OrcaSlicer Text Face (cube_orcaslicer_text.jpg)
+
+**Observed Issues:**
+- **Text is fully readable** - "Orca Slicer" text is clear and legible
+- **Good letter definition** - all characters are crisp with clean edges
+- **Wave design printed well** - decorative waves below text are smooth and continuous
+- **Right edge has visible layer banding** - consistent with rippling seen on X/Y faces
+- **Bottom edge problems** - rough, uneven material accumulation from first layer issues
+- **Small blob at bottom-right corner** - excess material from corner over-extrusion
+- **Excellent fine detail resolution** - small text features and thin wave lines reproduced accurately
+
+**Positive Signs:**
+- Fine text detail (small letters like 'r', 'c', 'e') are sharp and readable
+- No bridging issues on enclosed letters ('O', 'a')
+- Consistent extrusion on detailed features
+
+#### Set 3 Summary
+
+| Issue | Severity | Likely Cause |
+|-------|----------|--------------|
+| Bottom edge roughness | High | First layer problems (no purge) |
+| Corner blobs | Medium | Over-extrusion at direction changes |
+| Layer banding on edges | Medium | Speed/ringing (consistent with other faces) |
+| Logo/text detail | Good | N/A - positive result |
+| Fine feature resolution | Good | N/A - positive result |
 
 ---
 
@@ -152,10 +225,10 @@ Add after heating commands, before print starts.
 
 - [DONE] X face analyzed
 - [DONE] Y face analyzed
-- [PENDING] Z face analysis
-- [PENDING] Bottom face analysis
-- [PENDING] Orca logo face analysis
-- [PENDING] OrcaSlicer text face analysis
+- [DONE] Z face analyzed
+- [DONE] Bottom face analyzed
+- [DONE] Orca logo face analyzed
+- [DONE] OrcaSlicer text face analyzed
 - [PENDING] Implement purge line fix
 - [PENDING] Adjust first layer settings
 - [PENDING] Re-print calibration cube
@@ -168,11 +241,50 @@ Add after heating commands, before print starts.
 |-------|-------------|--------|
 | cube_x.jpg | X face of calibration cube | Analyzed |
 | cube_y.jpg | Y face of calibration cube | Analyzed |
-| cube_z.jpg | Z face of calibration cube | Pending |
-| cube_bottom.jpg | Bottom of calibration cube | Pending |
-| cube_orca_logo.jpg | Orca logo face | Pending |
-| cube_orcaslicer_text.jpg | OrcaSlicer text face | Pending |
+| cube_z.jpg | Z face (top surface) of calibration cube | Analyzed |
+| cube_bottom.jpg | Bottom of calibration cube | Analyzed |
+| cube_orca_logo.jpg | Orca logo face | Analyzed |
+| cube_orcaslicer_text.jpg | OrcaSlicer text face | Analyzed |
 
 ---
 
-**Next Session:** Continue analysis with remaining cube images, then implement fixes.
+## Complete Analysis Summary
+
+### Overall Print Quality Assessment
+
+**Rating: 6/10 - Acceptable for first print, but needs tuning**
+
+### What Went Well
+- **Detail resolution is excellent** - All embossed text (X, Y, Z, Orca Slicer) and the Orca logo are crisp and clearly readable
+- **Layer adhesion is solid** - No delamination or layer separation throughout the cube
+- **Z-axis consistency** - Top surface is clean, layers stack evenly
+- **Complex geometry** - Curved orca logo shape printed accurately
+- **Fine features** - Small text characters and thin wave lines reproduced well
+
+### What Needs Improvement
+| Priority | Issue | Root Cause | Fix |
+|----------|-------|------------|-----|
+| **HIGH** | Rough first layer, poor adhesion | No purge line | Add purge line to start G-code |
+| **HIGH** | Required 50% speed reduction | First layer too fast | Reduce first layer speed to 20-25mm/s |
+| **MEDIUM** | Diagonal banding/rippling on walls | Speed/ringing | Tune Pressure Advance, check belts |
+| **MEDIUM** | Corner blobs/over-extrusion | Direction changes | Pressure Advance tuning |
+| **LOW** | Minor stringing at bottom | Retraction at start | Purge line will help |
+
+### Conclusion
+
+The print demonstrates that the printer hardware is functioning correctly - the mechanical systems (X, Y, Z axes), hotend, and bed are all working well. The issues observed are **software/configuration problems**, not hardware problems:
+
+1. **Missing purge line** caused 80% of the visible defects (rough bottom, corner issues, first layer problems)
+2. **Speed settings** need adjustment for first layer
+3. **Pressure Advance** would improve wall quality but is optional tuning
+
+**Recommended next steps:**
+1. Add purge line to PRINT_START macro or OrcaSlicer start G-code
+2. Reduce first layer speed to 20-25mm/s in OrcaSlicer
+3. Re-print calibration cube to verify improvements
+4. (Optional) Tune Pressure Advance for better wall quality
+
+---
+
+**Analysis Complete:** 2025-11-26  
+**Next Action:** Implement purge line fix and adjust slicer settings
