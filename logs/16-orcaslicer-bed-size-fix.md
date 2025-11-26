@@ -21,8 +21,17 @@ When comparing sliced model position between OrcaSlicer and Mainsail G-code view
 
 ### Visual Evidence
 
-- `slicer_test_print.png`: Shows objects centered in OrcaSlicer
-- `printer_gcode_viewer_tracking.png`: Shows objects off-center in Mainsail
+**OrcaSlicer Preview:**
+
+![OrcaSlicer showing centered objects](../images/slicer_test_print.png)
+
+*Image shows objects centered on build plate in OrcaSlicer with 250mm bed configuration (before fix)*
+
+**Mainsail G-code Viewer:**
+
+![Mainsail showing off-center objects](../images/printer_gcode_viewer_tracking.png)
+
+*Image shows same objects appearing off-center in Mainsail's preview, revealing bed size mismatch*
 
 ---
 
