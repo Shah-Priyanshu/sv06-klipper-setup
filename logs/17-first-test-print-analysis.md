@@ -161,19 +161,58 @@ The screw required pliers to insert into the cube's threaded hole. This indicate
 - Screw threaded all the way in and sits flush
 - Mechanical connection achieved - parts are functional
 
+#### Screw Top Surface (screw_top.jpg)
+
+**Observed Issues:**
+- **Smooth top surface** - The flat top of the screw head is relatively clean with visible layer lines
+- **Stringing visible** - A few filament wisps trailing off the left side of the screw head
+- **Circular perimeter is decent** - Outer edge is fairly round but shows slight roughness
+- **Minor surface scratches** - Small marks visible on top, possibly from handling
+
+**Positive Signs:**
+- Top surface is flat and level
+- Circular geometry is maintained
+- No major defects on top surface
+
+#### Screw Thread Profile (screw_side.jpg)
+
+**Observed Issues:**
+- **Significant stringing at base** - Multiple filament strands hanging from the bottom/first layer area
+- **Thread profile is visible** - The thread grooves are defined but inconsistent
+- **Rough first layer/brim area** - The bottom flange shows poor first layer quality with ragged edges
+- **Thread peaks are rounded** - Thread crests are not sharp, showing slight over-extrusion or insufficient cooling
+- **Layer lines visible on threads** - Expected, but shows some inconsistency between layers
+- **Thread depth appears shallow** - The grooves between threads could be deeper for better engagement
+
+**Positive Signs:**
+- Overall thread geometry is recognizable
+- Screw maintains structural integrity
+- Multiple thread turns printed successfully
+- Layer adhesion is good throughout the threaded section
+
 #### Set 4 Summary
 
 | Issue | Severity | Likely Cause |
 |-------|----------|--------------|
 | Thread tolerance too tight | Medium | Hole shrinkage, over-extrusion on inner perimeters |
 | Stringing in screw slot | Medium | Retraction settings, no purge line |
+| Stringing at screw base | Medium | No purge line, retraction at print start |
+| Rounded thread peaks | Medium | Over-extrusion, cooling, or speed |
+| Rough first layer flange | High | No purge line (consistent with cube) |
 | Required pliers to assemble | Medium | Tolerance/shrinkage compensation needed |
 | Flush fit achieved | Good | Thread geometry is accurate |
+| Thread geometry intact | Good | Mechanical function achieved |
 
 **Tolerance Fix Options:**
 1. **Horizontal Expansion** - Add -0.1 to -0.2mm in slicer to compensate for shrinkage
 2. **XY Hole Compensation** - Enable in OrcaSlicer (typically 0.1-0.2mm)
 3. **Reduce flow rate** slightly for inner perimeters (98-99%)
+
+**Thread Quality Fix Options:**
+1. **Add purge line** - Will eliminate stringing at base from unpurged nozzle
+2. **Increase cooling** - Sharper thread peaks with better part cooling
+3. **Reduce speed for small features** - Better detail on thread geometry
+4. **Tune retraction** - Reduce stringing between moves
 
 ---
 
@@ -293,6 +332,8 @@ Add after heating commands, before print starts.
 | cube_orcaslicer_text.jpg | OrcaSlicer text face | Analyzed |
 | screw_bottom.jpg | Screw head showing plier marks | Analyzed |
 | cube_plus_screw.jpg | Cube with screw inserted (flush fit) | Analyzed |
+| screw_top.jpg | Screw head top view, showing surface quality | Analyzed |
+| screw_side.jpg | Screw thread profile, showing thread geometry | Analyzed |
 
 ---
 
@@ -317,16 +358,18 @@ Add after heating commands, before print starts.
 | **MEDIUM** | Diagonal banding/rippling on walls | Speed/ringing | Tune Pressure Advance, check belts |
 | **MEDIUM** | Corner blobs/over-extrusion | Direction changes | Pressure Advance tuning |
 | **MEDIUM** | Thread tolerance too tight | Hole shrinkage | Enable XY Hole Compensation (0.1-0.2mm) |
+| **MEDIUM** | Rounded thread peaks | Over-extrusion/cooling | Increase cooling, reduce flow slightly |
 | **LOW** | Minor stringing at bottom | Retraction at start | Purge line will help |
 
 ### Conclusion
 
 The print demonstrates that the printer hardware is functioning correctly - the mechanical systems (X, Y, Z axes), hotend, and bed are all working well. The issues observed are **software/configuration problems**, not hardware problems:
 
-1. **Missing purge line** caused 80% of the visible defects (rough bottom, corner issues, first layer problems)
+1. **Missing purge line** caused 80% of the visible defects (rough bottom, corner issues, first layer problems, stringing at screw base)
 2. **Speed settings** need adjustment for first layer
 3. **Pressure Advance** would improve wall quality but is optional tuning
 4. **Thread tolerance** is slightly tight - XY Hole Compensation can fix this for functional prints
+5. **Thread peaks** are rounded but functional - could be sharper with better cooling
 
 **Recommended next steps:**
 1. Add purge line to PRINT_START macro or OrcaSlicer start G-code
@@ -334,6 +377,7 @@ The print demonstrates that the printer hardware is functioning correctly - the 
 3. Enable XY Hole Compensation (0.1-0.2mm) for better thread/hole tolerances
 4. Re-print calibration cube to verify improvements
 5. (Optional) Tune Pressure Advance for better wall quality
+6. (Optional) Increase part cooling for sharper thread geometry
 
 ---
 
