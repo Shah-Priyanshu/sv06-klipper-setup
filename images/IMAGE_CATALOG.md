@@ -21,10 +21,162 @@ This document catalogs all screenshots and images in the printer configuration r
 | `screw_bottom.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Screw head (plier damage) | [DONE] REFERENCE |
 | `screw_top.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Screw head top surface | [DONE] REFERENCE |
 | `screw_side.jpg` | 2025-11-26 | 17-first-test-print-analysis.md | Screw thread profile | [DONE] REFERENCE |
+| `PA_test_orcaslicer.png` | 2025-11-26 | 20-pressure-advance-calibration.md | OrcaSlicer PA calibration dialog | [REFERENCE] |
+| `PA_tower_front.jpg` | 2025-11-26 | 20-pressure-advance-calibration.md | PA tower front view | [DONE] ANALYZED |
+| `PA_tower_back.jpg` | 2025-11-26 | 20-pressure-advance-calibration.md | PA tower back view (test patterns) | [DONE] ANALYZED |
+| `PA_tower_left.jpg` | 2025-11-26 | 20-pressure-advance-calibration.md | PA tower left side (corner quality) | [DONE] ANALYZED |
+| `PA_tower_right.jpg` | 2025-11-26 | 20-pressure-advance-calibration.md | PA tower right side (smooth face) | [DONE] ANALYZED |
 
 ---
 
 ## Image Details
+
+### 14. PA_test_orcaslicer.png
+
+**Date Taken:** 2025-11-26  
+**Source:** OrcaSlicer - Pressure Advance calibration tool  
+**Related Log:** [20-pressure-advance-calibration.md](../logs/20-pressure-advance-calibration.md)
+
+**Description:**
+Screenshot of OrcaSlicer's built-in Pressure Advance calibration tool showing the configuration dialog for generating a PA test tower.
+
+**What It Shows:**
+- PA calibration method selection (PA Tower)
+- Start PA value: 0.02
+- End PA value: 0.08
+- PA step: 0.005
+- Extruder type: DDE (Direct Drive Extruder)
+- Test tower generation interface
+
+**Purpose:**
+Reference for PA tower test parameters used to determine optimal Pressure Advance value.
+
+**Status:** [REFERENCE] Tool configuration screenshot
+
+**Technical Details:**
+- **Test Type:** PA Tower (speed changes at each section)
+- **PA Range:** 0.02 - 0.08 (12 sections)
+- **Step Size:** 0.005 per section
+- **Result:** Optimal PA determined to be 0.065
+
+---
+
+### 15. PA_tower_front.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - PA calibration tower  
+**Related Log:** [20-pressure-advance-calibration.md](../logs/20-pressure-advance-calibration.md)
+
+**Description:**
+Front view of printed Pressure Advance calibration tower showing both textured (test pattern) and smooth faces.
+
+**What It Shows:**
+- 12-section tower with PA values from 0.02 (bottom) to 0.08 (top)
+- Left side: Textured face with speed test pattern lines
+- Right side: Smooth face
+- Corner sharpness progression from bottom to top
+- Overall print quality across PA range
+
+**Analysis Results:**
+- **Bottom sections (PA 0.02-0.03):** Lines more pronounced, blobby appearance
+- **Middle sections (PA 0.04-0.05):** Lines becoming more uniform, improved quality
+- **Top sections (PA 0.06-0.08):** Lines cleanest and most uniform, best quality
+- **Corners:** Sharp and well-defined throughout tower
+
+**Status:** [DONE] ANALYZED - Phase 1 of 4-angle analysis
+
+---
+
+### 16. PA_tower_back.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - PA calibration tower  
+**Related Log:** [20-pressure-advance-calibration.md](../logs/20-pressure-advance-calibration.md)
+
+**Description:**
+Back view of PA calibration tower showing test pattern face with speed change artifacts clearly visible.
+
+**What It Shows:**
+- Test pattern lines from speed changes at each PA section
+- Stringing and blob artifacts at lower PA values
+- Surface quality progression from bottom to top
+- Most critical view for PA analysis
+
+**Analysis Results:**
+- **PA 0.02-0.03:** Visible stringing, blobs, over-extrusion appearance - FAIL
+- **PA 0.04-0.05:** Reduced stringing (50-70%), cleaner lines - ACCEPTABLE (current value)
+- **PA 0.06-0.075:** Very clean lines, no stringing, sharp corners - EXCELLENT (optimal)
+- **PA 0.08:** Clean appearance, needs corner verification - VERIFY
+
+**Critical Finding:**
+PA range 0.06-0.075 shows best overall quality with complete stringing elimination.
+
+**Status:** [DONE] ANALYZED - Phase 1 of 4-angle analysis
+
+---
+
+### 17. PA_tower_left.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - PA calibration tower  
+**Related Log:** [20-pressure-advance-calibration.md](../logs/20-pressure-advance-calibration.md)
+
+**Description:**
+Left side profile of PA tower held horizontally, showing patterned face and corner detail for quality verification.
+
+**What It Shows:**
+- Tower held horizontally showing left side profile
+- Test pattern lines visible running vertically
+- Corner sharpness at all PA levels
+- Surface finish on both patterned and smooth faces
+
+**Analysis Results:**
+- **PA 0.02-0.03:** Visible stringing wisps, rough surface, inconsistent lines
+- **PA 0.04-0.05:** Improved but still minor artifacts visible
+- **PA 0.06-0.065 (OPTIMAL):** Corner sharpness EXCELLENT, pristine surface finish, crisp line definition, NO under-extrusion
+- **PA 0.07-0.08:** Still maintains good quality, possible very slight under-extrusion at top
+
+**Critical Verification:**
+Confirmed NO under-extrusion at PA 0.06-0.065 range. Corners are razor sharp with perfect 90° edges.
+
+**Status:** [DONE] ANALYZED - Phase 2 of 4-angle analysis
+
+---
+
+### 18. PA_tower_right.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - PA calibration tower  
+**Related Log:** [20-pressure-advance-calibration.md](../logs/20-pressure-advance-calibration.md)
+
+**Description:**
+Right side profile of PA tower showing smooth face and corner quality verification.
+
+**What It Shows:**
+- Tower held horizontally showing right side
+- Smooth face clearly visible with surface finish quality
+- Corner sharpness and edge definition
+- Blob/bulge artifacts at lower PA sections
+
+**Analysis Results:**
+- **PA 0.02-0.03:** Surface rougher, visible corner blob/bulge from over-extrusion
+- **PA 0.04-0.05:** Cleaner than bottom, corner better but still minor blob visible
+- **PA 0.06-0.065 (OPTIMAL):** Corner RAZOR SHARP, smooth face FLAWLESS, NO gaps, NO bulging - BEST quality
+- **PA 0.07-0.08:** Corner remains sharp, NO under-extrusion visible, excellent quality
+
+**Final Determination:**
+PA 0.06-0.065 range confirmed as sweet spot. Optimal value: **0.065**
+
+**Status:** [DONE] ANALYZED - Phase 2 of 4-angle analysis
+
+**Calibration Result:**
+- **Previous Value:** 0.04 (acceptable)
+- **New Value:** 0.065 (optimal)
+- **Change:** +62.5% increase
+- **Applied:** 2025-11-26 22:13:48
+- **Verification:** Test prints confirmed excellent results
+
+---
 
 ### 1. start_end_gcode.png
 
@@ -454,6 +606,153 @@ Part of the first test print analysis to evaluate thread printing capability and
 
 ---
 
+### 14. PA_test_orcaslicer.png
+
+**Date Taken:** 2025-11-26  
+**Source:** OrcaSlicer - Pressure Advance calibration tool  
+**Related Log:** [20-pressure-advance-calibration.md](../logs/20-pressure-advance-calibration.md)
+
+**Description:**
+Screenshot of OrcaSlicer's built-in Pressure Advance calibration tool showing the configuration dialog for generating a PA test tower.
+
+**What It Shows:**
+- PA calibration method selection (PA Tower)
+- Start PA value: 0.02
+- End PA value: 0.08
+- PA step: 0.005
+- Extruder type: DDE (Direct Drive Extruder)
+- Test tower generation interface
+
+**Purpose:**
+Reference for PA tower test parameters used to determine optimal Pressure Advance value.
+
+**Status:** [REFERENCE] Tool configuration screenshot
+
+**Technical Details:**
+- **Test Type:** PA Tower (speed changes at each section)
+- **PA Range:** 0.02 - 0.08 (12 sections)
+- **Step Size:** 0.005 per section
+- **Result:** Optimal PA determined to be 0.065
+
+---
+
+### 15. PA_tower_front.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - PA calibration tower  
+**Related Log:** [20-pressure-advance-calibration.md](../logs/20-pressure-advance-calibration.md)
+
+**Description:**
+Front view of printed Pressure Advance calibration tower showing both textured (test pattern) and smooth faces.
+
+**What It Shows:**
+- 12-section tower with PA values from 0.02 (bottom) to 0.08 (top)
+- Left side: Textured face with speed test pattern lines
+- Right side: Smooth face
+- Corner sharpness progression from bottom to top
+- Overall print quality across PA range
+
+**Analysis Results:**
+- **Bottom sections (PA 0.02-0.03):** Lines more pronounced, blobby appearance
+- **Middle sections (PA 0.04-0.05):** Lines becoming more uniform, improved quality
+- **Top sections (PA 0.06-0.08):** Lines cleanest and most uniform, best quality
+- **Corners:** Sharp and well-defined throughout tower
+
+**Status:** [DONE] ANALYZED - Phase 1 of 4-angle analysis
+
+---
+
+### 16. PA_tower_back.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - PA calibration tower  
+**Related Log:** [20-pressure-advance-calibration.md](../logs/20-pressure-advance-calibration.md)
+
+**Description:**
+Back view of PA calibration tower showing test pattern face with speed change artifacts clearly visible.
+
+**What It Shows:**
+- Test pattern lines from speed changes at each PA section
+- Stringing and blob artifacts at lower PA values
+- Surface quality progression from bottom to top
+- Most critical view for PA analysis
+
+**Analysis Results:**
+- **PA 0.02-0.03:** Visible stringing, blobs, over-extrusion appearance - FAIL
+- **PA 0.04-0.05:** Reduced stringing (50-70%), cleaner lines - ACCEPTABLE (current value)
+- **PA 0.06-0.075:** Very clean lines, no stringing, sharp corners - EXCELLENT (optimal)
+- **PA 0.08:** Clean appearance, needs corner verification - VERIFY
+
+**Critical Finding:**
+PA range 0.06-0.075 shows best overall quality with complete stringing elimination.
+
+**Status:** [DONE] ANALYZED - Phase 1 of 4-angle analysis
+
+---
+
+### 17. PA_tower_left.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - PA calibration tower  
+**Related Log:** [20-pressure-advance-calibration.md](../logs/20-pressure-advance-calibration.md)
+
+**Description:**
+Left side profile of PA tower held horizontally, showing patterned face and corner detail for quality verification.
+
+**What It Shows:**
+- Tower held horizontally showing left side profile
+- Test pattern lines visible running vertically
+- Corner sharpness at all PA levels
+- Surface finish on both patterned and smooth faces
+
+**Analysis Results:**
+- **PA 0.02-0.03:** Visible stringing wisps, rough surface, inconsistent lines
+- **PA 0.04-0.05:** Improved but still minor artifacts visible
+- **PA 0.06-0.065 (OPTIMAL):** Corner sharpness EXCELLENT, pristine surface finish, crisp line definition, NO under-extrusion
+- **PA 0.07-0.08:** Still maintains good quality, possible very slight under-extrusion at top
+
+**Critical Verification:**
+Confirmed NO under-extrusion at PA 0.06-0.065 range. Corners are razor sharp with perfect 90° edges.
+
+**Status:** [DONE] ANALYZED - Phase 2 of 4-angle analysis
+
+---
+
+### 18. PA_tower_right.jpg
+
+**Date Taken:** 2025-11-26  
+**Source:** Physical photograph - PA calibration tower  
+**Related Log:** [20-pressure-advance-calibration.md](../logs/20-pressure-advance-calibration.md)
+
+**Description:**
+Right side profile of PA tower showing smooth face and corner quality verification.
+
+**What It Shows:**
+- Tower held horizontally showing right side
+- Smooth face clearly visible with surface finish quality
+- Corner sharpness and edge definition
+- Blob/bulge artifacts at lower PA sections
+
+**Analysis Results:**
+- **PA 0.02-0.03:** Surface rougher, visible corner blob/bulge from over-extrusion
+- **PA 0.04-0.05:** Cleaner than bottom, corner better but still minor blob visible
+- **PA 0.06-0.065 (OPTIMAL):** Corner RAZOR SHARP, smooth face FLAWLESS, NO gaps, NO bulging - BEST quality
+- **PA 0.07-0.08:** Corner remains sharp, NO under-extrusion visible, excellent quality
+
+**Final Determination:**
+PA 0.06-0.065 range confirmed as sweet spot. Optimal value: **0.065**
+
+**Status:** [DONE] ANALYZED - Phase 2 of 4-angle analysis
+
+**Calibration Result:**
+- **Previous Value:** 0.04 (acceptable)
+- **New Value:** 0.065 (optimal)
+- **Change:** +62.5% increase
+- **Applied:** 2025-11-26 22:13:48
+- **Verification:** Test prints confirmed excellent results
+
+---
+
 ## Image Usage Guidelines
 
 ### Referencing Images in Logs
@@ -553,8 +852,14 @@ Images are categorized by:
 - `screw_top.jpg` - Screw head top surface
 - `screw_side.jpg` - Thread geometry profile
 
+**Calibration - Pressure Advance:**
+- `PA_test_orcaslicer.png` - PA calibration tool settings
+- `PA_tower_front.jpg` - PA tower front view (textured/smooth faces)
+- `PA_tower_back.jpg` - PA tower back view (test patterns, critical analysis)
+- `PA_tower_left.jpg` - PA tower left side (corner verification)
+- `PA_tower_right.jpg` - PA tower right side (smooth face quality)
+
 **Future Categories:**
-- Calibration results (bed mesh visualizations, etc.)
 - Hardware modifications
 - Web interface configurations
 - Error messages and logs
@@ -565,10 +870,14 @@ Images are categorized by:
 
 ### Image Formats
 
-All images currently in PNG format for:
-- Lossless quality
-- Screenshot compatibility
-- Git-friendly (binary files tracked with LFS if needed)
+**Current formats:**
+- **PNG:** Screenshots and diagrams (lossless)
+- **JPG:** Photographs of physical prints (compressed but high quality)
+
+**Rationale:**
+- Lossless quality for screenshots
+- Reasonable file sizes for photographs
+- Git-friendly (binary files)
 
 ### Resolution Guidelines
 
@@ -589,10 +898,11 @@ All images currently in PNG format for:
 
 ## Related Documentation
 
+- [Log 13: OrcaSlicer Setup](../logs/13-orcaslicer-setup.md) - Initial OrcaSlicer configuration
 - [Log 15: G-Code Upload Fix](../logs/15-gcode-path-fix.md) - PRINT_START macro configuration
 - [Log 16: Bed Size Fix](../logs/16-orcaslicer-bed-size-fix.md) - OrcaSlicer bed dimension correction
 - [Log 17: First Test Print Analysis](../logs/17-first-test-print-analysis.md) - Calibration cube quality analysis
-- [Log 13: OrcaSlicer Setup](../logs/13-orcaslicer-setup.md) - Initial OrcaSlicer configuration
+- [Log 20: Pressure Advance Calibration](../logs/20-pressure-advance-calibration.md) - PA optimization from 0.04 to 0.065
 
 ---
 
@@ -607,10 +917,14 @@ All images currently in PNG format for:
 - Added screw_top.jpg and screw_side.jpg from calibration cube analysis
 - Added "Print Quality Analysis" category
 - Added all calibration cube images (cube_x, cube_y, cube_z, cube_bottom, cube_orca_logo, cube_orcaslicer_text, cube_plus_screw, screw_bottom)
+- Added Pressure Advance calibration images (PA_test_orcaslicer.png, PA_tower_front.jpg, PA_tower_back.jpg, PA_tower_left.jpg, PA_tower_right.jpg)
+- Documented complete PA tower 4-angle analysis
+- Added "Calibration - Pressure Advance" category
+- Documented PA optimization from 0.04 to 0.065 (verified successful)
 
 ---
 
 **Last Updated:** 2025-11-26  
-**Total Images:** 13  
-**Issues Documented:** 3  
-**All Issues Status:** [DONE] RESOLVED/REFERENCE
+**Total Images:** 18  
+**Issues Documented:** 4  
+**All Issues Status:** [DONE] RESOLVED/REFERENCE/ANALYZED
